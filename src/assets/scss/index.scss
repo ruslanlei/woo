@@ -1,0 +1,13 @@
+@import "node_modules/normalize-scss/sass/normalize";
+@use "varriables";
+@use "flex";
+@use "fonts";
+@use "media";
+
+@include normalize();
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: sans-serif;
+}
