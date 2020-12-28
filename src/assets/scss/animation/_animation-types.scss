@@ -1,0 +1,23 @@
+@import "animation";
+
+.search-input {
+  @include enter-and-leave {
+    width: 0;
+    margin-left: 0;
+    background: transparent;
+  }
+  @include active-class {
+    transition: .3s;
+  }
+}
+
+.cards {
+  @include enter-and-leave {
+    transform: translateY(30vh);
+    opacity: 0;
+  }
+  @include active-class {
+    transition: transform .5s, opacity .5s;
+    transition-delay: calc( 0.1s * var(--i) );
+  }
+}

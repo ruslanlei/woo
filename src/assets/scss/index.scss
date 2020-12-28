@@ -1,13 +1,15 @@
 @import "node_modules/normalize-scss/sass/normalize";
-@use "varriables";
-@use "flex";
-@use "fonts";
-@use "media";
+@import "varriables";
+@import "flex";
+@import "fonts";
+@import "media";
+@import "animation/animation-types";
 
 @include normalize();
 
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: sans-serif;
+  @include main-font;
+  box-sizing: border-box;
 }

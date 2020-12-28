@@ -1,0 +1,51 @@
+@mixin enter {
+  &-enter-from {
+    @content
+  }
+}
+
+@mixin leave {
+  &-leave-to {
+    @content
+  }
+}
+
+@mixin enter-and-leave {
+  @include enter {
+    @content
+  }
+  @include leave {
+    @content
+  }
+}
+
+@mixin enter-active {
+  &-enter-active {
+    @content
+  }
+}
+
+@mixin leave-active {
+  &-leave-active {
+    @content
+  }
+}
+
+@mixin active-class {
+  @include enter-active {
+    @content
+  }
+  @include leave-active {
+    @content
+  }
+}
+
+@mixin animation {
+  @include enter-and-leave {
+    @content
+  }
+  @include active-class {
+    @content
+  }
+}
+
