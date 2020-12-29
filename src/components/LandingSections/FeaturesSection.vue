@@ -1,5 +1,5 @@
 <template>
-  <div ref="features" class="feature-section">
+  <div class="feature-section">
     <div class="feature-section__heading">
       Your eCommerce <br /> made simple
     </div>
@@ -12,14 +12,14 @@
         <template v-slot:default="slotProps">
           <template v-for="(feature, index) in features" :key="index">
             <transition name="cards" v-on="{
-              ...(index === 'community' ? { enter } : {})
+              ...(index === 2 ? { enter } : {})
             }">
               <FeatureCard
-                v-if="sectionVisible || transitionEnded"
+                v-if="percentageOfVisibility > 54 || transitionEnded"
                 :heading="feature.heading"
                 :text="feature.text"
                 :button-text="feature.buttonText"
-                :style="{'--i': 0}"
+                :style="{'--i': index}"
                 :class="[
                 'feature-section__feature',
                 [`feature-section__feature-${feature.name}`]
@@ -53,12 +53,14 @@
 </template>
 
 <script>
+import SectionMixin from '@/mixins/SectionMixin';
 import Container from '@/components/Container/Container.vue';
 import FeatureCard from '@/components/FeatureCard/FeatureCard.vue';
 import ImageAnimator from '@/components/ImageAnimator/ImageAnimator.vue';
 
 export default {
   name: 'FeaturesSection',
+  mixins: [SectionMixin],
   components: {
     Container,
     FeatureCard,
@@ -66,10 +68,9 @@ export default {
   },
   data: () => ({
     initializeAnimation: false,
-    sectionVisible: false,
     transitionEnded: false,
-    features: {
-      start: {
+    features: [
+      {
         name: 'start',
         images: require.context(
           '@/assets/img/sections/features/start',
@@ -89,7 +90,7 @@ export default {
         text: 'Add WooCommerce plugin to any WordPress site and set up a new store in minutes.',
         buttonText: 'Ecommerce for Wordpress ›',
       },
-      customize: {
+      {
         name: 'customize',
         images: require.context(
           '@/assets/img/sections/features/customize',
@@ -112,7 +113,7 @@ export default {
         text: 'From subscriptions to gym classes to luxury cars, WooCommerce is fully customizable.',
         buttonText: 'Browse Extensions ›',
       },
-      community: {
+      {
         name: 'community',
         images: require.context(
           '@/assets/img/sections/features/community',
@@ -133,37 +134,15 @@ export default {
         text: 'WooCommerce is one of the fastest-growing eCommerce communities.',
         buttonText: 'Check our Forums ›',
       },
-    },
+    ],
   }),
   methods: {
-    receiveVisibility() {
-      const featuresSectionRect = this.$refs.features.getBoundingClientRect();
-
-      const targetPositionTop = window.pageYOffset + featuresSectionRect.top;
-      const targetPositionBottom = window.pageYOffset + featuresSectionRect.bottom;
-
-      const windowPositionTop = window.pageYOffset;
-      const windowPositionBottom = window.pageYOffset + document.documentElement.clientHeight;
-
-      const vh = window.innerHeight / 100;
-
-      this.$nextTick(() => {
-        this.sectionVisible = targetPositionBottom > windowPositionTop
-          && targetPositionTop < windowPositionBottom - vh * 50;
-      });
-    },
     enter() {
       this.transitionEnded = true;
       this.$nextTick(() => {
         this.initializeAnimation = true;
       });
     },
-  },
-  created() {
-    window.addEventListener('scroll', this.receiveVisibility);
-  },
-  mounted() {
-    this.receiveVisibility();
   },
 };
 </script>

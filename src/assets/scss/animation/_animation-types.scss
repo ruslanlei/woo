@@ -21,3 +21,14 @@
     transition-delay: calc( 0.1s * var(--i) );
   }
 }
+
+.additional-cards {
+  @include enter-and-leave {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  @include active-class {
+    transition: transform .5s, opacity .5s;
+    transition-delay: calc( 0.1s * var(--i) );
+  }
+}

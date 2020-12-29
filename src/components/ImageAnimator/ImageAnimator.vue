@@ -7,10 +7,12 @@
 <script>
 import anime from 'animejs';
 import debounce from 'lodash/debounce';
+import VisibilityMixin from '@/mixins/VisibilityMixin';
 import animationTypes from './animationTypes';
 
 export default {
   name: 'ImageAnimator',
+  mixins: [VisibilityMixin],
   props: {
     initialize: {
       type: Boolean,
@@ -29,7 +31,6 @@ export default {
     id: null,
     animation: null,
     animationPaused: false,
-    isAnimatorVisible: true,
     preAnimationPlayed: false,
     animationTypes,
   }),
@@ -51,20 +52,6 @@ export default {
           this.pauseAnimation();
         }
         this.adjournAnimationPlay();
-      }
-    },
-    receiveVisibility() {
-      if (this.$refs.animator) {
-        const animatorRect = this.$refs.animator.getBoundingClientRect();
-
-        const targetPositionTop = window.pageYOffset + animatorRect.top;
-        const targetPositionBottom = window.pageYOffset + animatorRect.bottom;
-
-        const windowPositionTop = window.pageYOffset;
-        const windowPositionBottom = window.pageYOffset + document.documentElement.clientHeight;
-
-        this.isAnimatorVisible = targetPositionBottom > windowPositionTop
-          && targetPositionTop < windowPositionBottom;
       }
     },
     initializeAnimation() {
@@ -104,7 +91,7 @@ export default {
     initialize() {
       this.initializeAnimation();
     },
-    isAnimatorVisible(newVal, oldVal) {
+    componentVisible(newVal, oldVal) {
       if (newVal === oldVal || !this.animation) return;
       // eslint-disable-next-line no-unused-expressions
       newVal ? this.playAnimation() : this.pauseAnimation();

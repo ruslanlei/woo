@@ -53,6 +53,18 @@ export default {
     easing: 'easeOutBounce',
     delay: anime.stagger(30, { from: 'last' }),
   },
+  slideIn: {
+    translateY: [
+      { value: '40px', duration: 0 },
+      { value: 0, easing: 'easeInOutBack', duration: 1300 },
+    ],
+    opacity: [
+      { value: 0, duration: 0 },
+      { value: 1, easing: 'easeInOutQuad', duration: 700 },
+    ],
+    easing: 'easeOutBounce',
+    delay: anime.stagger(30, { from: 'last' }),
+  },
   growth: {
     scale: [
       { value: 0.9, duration: 0 },
@@ -64,5 +76,38 @@ export default {
     ],
     easing: 'easeInOutQuad',
     delay: anime.stagger(50, { from: 'center' }),
+  },
+  flashes: {
+    scale: [
+      { value: 0.98 },
+      { value: 1 },
+    ],
+    opacity: [
+      { value: 0.4 },
+      { value: 1 },
+      { value: 0.4 },
+      { value: 1 },
+      { value: 0.4 },
+      { value: 1 },
+      { value: 0.4 },
+      { value: 1 },
+      { value: 0.4 },
+      { value: 1 },
+    ],
+    translateX: [
+      { value: 0 },
+      { value: '10px' },
+      { value: '-10px' },
+      { value: 0 },
+    ],
+    translateY: [
+      { value: '-10px' },
+      { value: 0 },
+      { value: '10px' },
+      { value: 0 },
+    ],
+    duration: 12000,
+    easing: 'easeInOutCirc',
+    delay: anime.stagger(1000, { grid: [3, 2], from: 'first' }),
   },
 };

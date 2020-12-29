@@ -38,6 +38,7 @@ export default {
 
 @each $size, $v, $h, $fs, $lh in (
     ("sm", 13, 14, 18, 21),
+    ("xs", 22, 26, 18, 21),
     ("lg", 26, 62, 18, 21),
 ) {
   .button-size__#{$size} {

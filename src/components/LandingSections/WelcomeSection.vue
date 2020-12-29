@@ -2,7 +2,7 @@
   <div class="welcome-section">
     <Container class="welcome-section__container">
       <img
-        v-if="showWLetter"
+        v-if="componentVisible"
         :src="require('@/assets/img/sections/welcome/w-letter.svg')"
         class="welcome-section__background-letter"
         alt="background-letter"
@@ -81,20 +81,30 @@
 </template>
 
 <script>
+import SectionMixin from '@/mixins/SectionMixin';
 import Container from '@/components/Container/Container.vue';
 import Button from '@/components/Button/Button.vue';
 import ImageAnimator from '@/components/ImageAnimator/ImageAnimator.vue';
-import { mapGetters } from 'vuex';
 
 export default {
   name: 'WelcomeSection',
+  mixins: [SectionMixin],
   components: {
     Container,
     Button,
     ImageAnimator,
   },
   data: () => ({
-    images: [],
+    images: require.context(
+      '@/assets/img/sections/welcome/ImageAnimator',
+      true,
+      /^.*\.png|svg|jpg$/,
+    )
+      .keys()
+      .map((img) => ({
+        name: img.replace(/\.\//g, '').replace(/\.png|\.svg|\.jpg/g, ''),
+        filename: img.replace(/\.\//g, ''),
+      })),
     buttons: [
       {
         name: 'sale',
@@ -113,29 +123,6 @@ export default {
       },
     ],
   }),
-  computed: {
-    ...mapGetters({
-      pageYOffset: 'getPageYOffset',
-    }),
-    showWLetter() {
-      const windowHeight = window.innerHeight;
-      const onePercent = windowHeight / 100;
-      const scrolledInPercents = Math.round(this.pageYOffset / onePercent);
-      return scrolledInPercents < 75;
-    },
-  },
-  created() {
-    this.images = require.context(
-      '@/assets/img/sections/welcome/ImageAnimator',
-      true,
-      /^.*\.png|svg|jpg$/,
-    )
-      .keys()
-      .map((img) => ({
-        name: img.replace(/\.\//g, '').replace(/\.png|\.svg|\.jpg/g, ''),
-        filename: img.replace(/\.\//g, ''),
-      }));
-  },
 };
 </script>
 

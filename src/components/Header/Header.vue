@@ -1,5 +1,15 @@
 <template>
-  <div class="header" :style="computedStyles" :class="{'header-filled': pageYOffset > 500}">
+  <div
+    :class="{
+      'header': true,
+      'header--white-transparent':
+        pageYOffset > 300
+        && pageYOffset < 800
+        && activeSection === 'WelcomeSection',
+      'header--white': pageYOffset > 800 || activeSection === 'FeaturesSection',
+      'header--purple': activeSection === 'AdditionalFeaturesSection',
+    }"
+  >
     <Container class="header__container">
       <img class="header__logo" src="@/assets/img/logo.svg" alt="Logo">
       <Button
@@ -56,7 +66,7 @@ export default {
           text: 'Community',
         },
         {
-          name: 'develop',
+          name: 'features',
           text: 'Develop',
         },
         {
@@ -70,16 +80,8 @@ export default {
   computed: {
     ...mapGetters({
       pageYOffset: 'getPageYOffset',
+      activeSection: 'getActiveSection',
     }),
-    computedStyles() {
-      const windowHeight = window.innerHeight;
-      const onePercent = windowHeight / 100;
-      const scrolledInPercents = Math.round(this.pageYOffset / onePercent);
-      const bgOpacity = (scrolledInPercents / 100).toFixed(1);
-      return {
-        backgroundColor: [`rgba(255,255,255, ${bgOpacity < 0.2 ? 0 : bgOpacity})`],
-      };
-    },
   },
 };
 </script>
@@ -92,6 +94,19 @@ export default {
     width: 100%;
     padding: 37px 0;
     transition: .3s;
+    &--white-transparent {
+      backdrop-filter: blur(20px);
+      background: rgba($color-blue-light, 0.9);
+    }
+    &--white {
+      backdrop-filter: blur(20px);
+      background: rgba($color-white, 0.9);
+      box-shadow: 0 1px 2px rgba(black, 0.1);
+    }
+    &--purple {
+      backdrop-filter: blur(20px);
+      background: rgba($color-purple, 0.9);
+    }
     &-filled {
       background: $color-white;
     }
