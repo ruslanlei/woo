@@ -3,9 +3,9 @@
     :class="{
       'header': true,
       'header--white-transparent':
-        pageYOffset > 300
+        (pageYOffset > 300
         && pageYOffset < 800
-        && activeSection === 'WelcomeSection',
+        && activeSection === 'WelcomeSection') || activeSection === 'TestimonialsSection',
       'header--white': pageYOffset > 800 || activeSection === 'FeaturesSection',
       'header--purple': activeSection === 'AdditionalFeaturesSection',
     }"

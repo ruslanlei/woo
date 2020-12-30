@@ -53,6 +53,22 @@ export default {
     easing: 'easeOutBounce',
     delay: anime.stagger(30, { from: 'last' }),
   },
+  dropTestimonials: {
+    translateX: [
+      { value: '-10px', duration: 0 },
+      { value: 0, easing: 'easeInOutBack', duration: 1300 },
+    ],
+    translateY: [
+      { value: '-10px', duration: 0 },
+      { value: 0, easing: 'easeInOutBack', duration: 1300 },
+    ],
+    opacity: [
+      { value: 0, duration: 0 },
+      { value: 1, easing: 'easeInOutQuad', duration: 1300 },
+    ],
+    easing: 'easeOutBounce',
+    delay: anime.stagger(100, { from: 'last' }),
+  },
   slideIn: {
     translateY: [
       { value: '40px', duration: 0 },
@@ -107,6 +123,39 @@ export default {
       { value: 0 },
     ],
     duration: 12000,
+    easing: 'easeInOutCirc',
+    delay: anime.stagger(1000, { grid: [3, 2], from: 'first' }),
+  },
+  flashesTestimonials: {
+    scale: [
+      { value: 0.99 },
+      { value: 1 },
+    ],
+    opacity: [
+      { value: 0.7 },
+      { value: 1 },
+      { value: 0.7 },
+      { value: 1 },
+      { value: 0.7 },
+      { value: 1 },
+      { value: 0.7 },
+      { value: 1 },
+      { value: 0.7 },
+      { value: 1 },
+    ],
+    translateX: [
+      { value: 0 },
+      { value: '6px' },
+      { value: '-6px' },
+      { value: 0 },
+    ],
+    translateY: [
+      { value: '-6px' },
+      { value: 0 },
+      { value: '6px' },
+      { value: 0 },
+    ],
+    duration: 14000,
     easing: 'easeInOutCirc',
     delay: anime.stagger(1000, { grid: [3, 2], from: 'first' }),
   },
