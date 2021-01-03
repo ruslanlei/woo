@@ -1,10 +1,15 @@
 import { mapActions } from 'vuex';
 import VisibilityMixin from '@/mixins/VisibilityMixin';
+import Container from '@/components/Container/Container.vue';
 
 export default {
   mixins: [VisibilityMixin],
+  components: {
+    Container,
+  },
   data: () => ({
     sectionActive: false,
+    initializeAnimation: false,
   }),
   methods: {
     ...mapActions({
@@ -19,6 +24,16 @@ export default {
         this.receiveActiveSection(this.$options.name);
       } else {
         this.sectionActive = false;
+      }
+    },
+  },
+  watch: {
+    percentageOfVisibility(val) {
+      if (this.initializeAnimation) return;
+      if (val >= 35) {
+        this.$nextTick(() => {
+          this.initializeAnimation = true;
+        });
       }
     },
   },

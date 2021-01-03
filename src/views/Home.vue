@@ -4,6 +4,8 @@
     <FeaturesSection class="homepage__section homepage__features-section" />
     <AdditionalFeaturesSection class="homepage__section homepage__additional-features-section" />
     <TestimonialsSection class="homepage__section homepage__testimonials-section" />
+    <PeopleSection class="homepage__section homepage__people-section" />
+    <CtaSection class="homepage__section homepage__cta-section"></CtaSection>
   </div>
 </template>
 
@@ -12,6 +14,8 @@ import WelcomeSection from '@/components/LandingSections/WelcomeSection.vue';
 import FeaturesSection from '@/components/LandingSections/FeaturesSection.vue';
 import AdditionalFeaturesSection from '@/components/LandingSections/AdditionalFeaturesSection.vue';
 import TestimonialsSection from '@/components/LandingSections/TestimonialsSection.vue';
+import PeopleSection from '@/components/LandingSections/PeopleSection.vue';
+import CtaSection from '@/components/LandingSections/CtaSection.vue';
 
 export default {
   name: 'Home',
@@ -20,6 +24,8 @@ export default {
     FeaturesSection,
     AdditionalFeaturesSection,
     TestimonialsSection,
+    PeopleSection,
+    CtaSection,
   },
 };
 </script>

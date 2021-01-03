@@ -48,20 +48,31 @@ export default {
   }
 }
 
-@each $state, $color, $background, $hoverColor, $hoverBackground in (
-    ("purple-transparent", $color-purple-deep, transparent, black, transparent),
-    ("purple", $color-white, $color-purple, $color-white, $color-purple-deep),
-    ("blue-transparent", $color-blue, transparent, black, transparent),
-    ("green", $color-white, $color-green, $color-white, $color-green-deep),
-    ("yellow", $color-white, $color-yellow, $color-white, $color-yellow-deep),
-    ("red", $color-white, $color-red, $color-white, $color-red-deep),
+@each $state, $color, $background, $border, $hoverColor, $hoverBackground, $hoverBorder in (
+    ("purple-transparent", $color-purple-deep, transparent, none, black, transparent, none),
+    ("purple", $color-white, $color-purple, $color-white, none, $color-purple-deep, none),
+    ("blue-transparent", $color-blue, transparent, none, black, transparent, none),
+    ("green", $color-white, $color-green, $color-white, none, $color-green-deep, none),
+    ("yellow", $color-white, $color-yellow, $color-white, none, $color-yellow-deep, none),
+    ("red", $color-white, $color-red, $color-white, none, $color-red-deep, none),
+    (
+      "white-transparent",
+      $color-white,
+      transparent,
+      $color-white,
+      $color-purple,
+      $color-white,
+      $color-white
+    ),
 ) {
   .button-state__#{$state} {
     color: $color;
     background: $background;
+    border-color: $border;
     &:hover {
       color: $hoverColor;
       background: $hoverBackground;
+      border-color: $hoverBorder;
     }
   }
 }

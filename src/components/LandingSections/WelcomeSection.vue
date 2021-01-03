@@ -1,6 +1,6 @@
 <template>
   <div class="welcome-section">
-    <Container class="welcome-section__container">
+    <Container size="md" class="welcome-section__container">
       <img
         v-if="componentVisible"
         :src="require('@/assets/img/sections/welcome/w-letter.svg')"
@@ -30,7 +30,7 @@
           </div>
         <div class="welcome-section__column welcome-section__column-right">
           <ImageAnimator
-            :initialize="true"
+            :initialize="initializeAnimation"
             pre-animation-type="growth"
             animation-type="default"
           >
@@ -82,7 +82,6 @@
 
 <script>
 import SectionMixin from '@/mixins/SectionMixin';
-import Container from '@/components/Container/Container.vue';
 import Button from '@/components/Button/Button.vue';
 import ImageAnimator from '@/components/ImageAnimator/ImageAnimator.vue';
 
@@ -90,7 +89,6 @@ export default {
   name: 'WelcomeSection',
   mixins: [SectionMixin],
   components: {
-    Container,
     Button,
     ImageAnimator,
   },
@@ -149,7 +147,7 @@ export default {
       height: 100%;
       position: relative;
       z-index: 2;
-      padding: 0 165px;
+      //padding: 0 165px;
     }
     &__column {
       width: 50%;

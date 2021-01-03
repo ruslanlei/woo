@@ -1,6 +1,10 @@
 <template>
   <div class="testimonials-section">
     <Container class="testimonials-section__container">
+      <div class="testimonials-section__heading">
+        Trusted by Agencies
+        & Store Owners
+      </div>
       <ImageAnimator
         class="testimonials-section__image-animator"
         :initialize="initializeAnimation"
@@ -33,7 +37,6 @@
 
 <script>
 import SectionMixin from '@/mixins/SectionMixin';
-import Container from '@/components/Container/Container.vue';
 import CardSlider from '@/components/CardSlider/CardSlider.vue';
 import ImageAnimator from '@/components/ImageAnimator/ImageAnimator.vue';
 
@@ -41,12 +44,10 @@ export default {
   name: 'TestimonialsSection',
   mixins: [SectionMixin],
   components: {
-    Container,
     CardSlider,
     ImageAnimator,
   },
   data: () => ({
-    initializeAnimation: false,
     commentsList: [
       'No other eCommerce platform allows people to start for free and grow their store as their business grows. More importantly, WooCommerce doesn\'t charge you a portion of your profits as your business grows!',
       'Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.',
@@ -69,16 +70,6 @@ export default {
         filename: img.replace(/\.\//g, ''),
       })),
   }),
-  watch: {
-    percentageOfVisibility(val) {
-      if (this.initializeAnimation) return;
-      if (val >= 25) {
-        this.$nextTick(() => {
-          this.initializeAnimation = true;
-        });
-      }
-    },
-  },
 };
 </script>
 
@@ -98,6 +89,14 @@ export default {
       height: 100%;
       @include content-centred;
     }
+    &__heading {
+      @include heading-dark;
+      letter-spacing: -1px;
+      position: absolute;
+      top: 14%;
+      max-width: 570px;
+      text-align: center;
+    }
     &__image-animator {
       position: absolute;
       top: 0;
@@ -106,6 +105,7 @@ export default {
       height: 100%;
       &-image {
         position: absolute;
+        opacity: 0;
         &-employe-1 {
           top: 20%;
           left: 18%;

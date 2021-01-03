@@ -1,17 +1,11 @@
 <template>
-  <div
-    :class="{
-      'header': true,
-      'header--white-transparent':
-        (pageYOffset > 300
-        && pageYOffset < 800
-        && activeSection === 'WelcomeSection') || activeSection === 'TestimonialsSection',
-      'header--white': pageYOffset > 800 || activeSection === 'FeaturesSection',
-      'header--purple': activeSection === 'AdditionalFeaturesSection',
-    }"
-  >
+  <div :class="computedClasses">
     <Container class="header__container">
-      <img class="header__logo" src="@/assets/img/logo.svg" alt="Logo">
+      <img
+        class="header__logo"
+        :src="require('@/assets/img/logo.svg')"
+        alt="Logo"
+      >
       <Button
         v-for="nav in navItems"
         :key="nav.name"
@@ -82,6 +76,42 @@ export default {
       pageYOffset: 'getPageYOffset',
       activeSection: 'getActiveSection',
     }),
+    computedClasses() {
+      switch (this.activeSection) {
+        case 'WelcomeSection':
+          return {
+            header: true,
+            'header--white-transparent': this.pageYOffset > 300 && this.pageYOffset <= 800,
+            'header--white': this.pageYOffset > 800,
+          };
+        case 'FeaturesSection':
+          return {
+            header: true,
+            'header--white': this.pageYOffset > 800,
+          };
+        case 'AdditionalFeaturesSection':
+        case 'CtaSection':
+        case 'Footer':
+          return {
+            header: true,
+            'header--purple': true,
+          };
+        case 'TestimonialsSection':
+          return {
+            header: true,
+            'header--white': true,
+          };
+        case 'PeopleSection':
+          return {
+            header: true,
+            'header--white': true,
+          };
+        default:
+          return {
+            header: true,
+          };
+      }
+    },
   },
 };
 </script>

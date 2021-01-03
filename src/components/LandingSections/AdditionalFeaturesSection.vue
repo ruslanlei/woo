@@ -4,11 +4,10 @@
       <div class="additional-features-section__decoration-top" />
       <div class="additional-features-section__decoration-bottom" />
     </div>
-    <Container class="additional-features-section__container">
+    <Container size="sm" class="additional-features-section__container">
       <ImageAnimator
         class="additional-features-section__image-animator"
-        :initialize="true"
-        pre-animation-type="growth"
+        :initialize="initializeAnimation && transitionEnded"
         animation-type="flashes"
       >
         <template v-slot:default="slotProps">
@@ -28,43 +27,44 @@
           >
         </template>
       </ImageAnimator>
-      <template v-for="(feature, index) in features" :key="index">
-        <transition
-          name="additional-cards"
-          v-on="{
+      <div>
+        <template v-for="(feature, index) in features" :key="index">
+          <transition
+            name="additional-cards"
+            v-on="{
             ...(index === 1 ? { enter } : {})
           }"
-        >
-          <FeatureCard
-            v-if="percentageOfVisibility > 54 || transitionEnded"
-            :heading="feature.heading"
-            :text="feature.text"
-            :button-text="feature.buttonText"
-            :style="{'--i': index}"
-            :class="[
+          >
+            <FeatureCard
+              v-if="initializeAnimation || transitionEnded"
+              :heading="feature.heading"
+              :text="feature.text"
+              :button-text="feature.buttonText"
+              :style="{'--i': index}"
+              :class="[
               'additional-features-section__feature',
                [`additional-features-section__feature-${feature.name}`]
             ]"
-            :type="!(index % 2) ? 'additional' : 'additional-reverse'"
-          >
-            <img
-              v-for="(image, index) in feature.images"
-              :key="index"
-              :src="require(
+              :type="!(index % 2) ? 'additional' : 'additional-reverse'"
+            >
+              <img
+                v-for="(image, index) in feature.images"
+                :key="index"
+                :src="require(
                 // eslint-disable-next-line max-len
                 `@/assets/img/sections/additional-features/features/${feature.name}/${image.filename}`
               )"
-            >
-          </FeatureCard>
-        </transition>
-      </template>
+              >
+            </FeatureCard>
+          </transition>
+        </template>
+      </div>
     </Container>
   </div>
 </template>
 
 <script>
 import SectionMixin from '@/mixins/SectionMixin';
-import Container from '@/components/Container/Container.vue';
 import ImageAnimator from '@/components/ImageAnimator/ImageAnimator.vue';
 import FeatureCard from '@/components/FeatureCard/FeatureCard.vue';
 
@@ -72,7 +72,6 @@ export default {
   name: 'AdditionalFeaturesSection',
   mixins: [SectionMixin],
   components: {
-    Container,
     ImageAnimator,
     FeatureCard,
   },
@@ -140,13 +139,13 @@ export default {
       &-develop {
         position: absolute;
         top: -30px;
-        left: 15%;
+        left: 0;
         margin-bottom: 55px;
       }
       &-community {
         position: absolute;
         bottom: -30px;
-        right: 15%;
+        right: 0;
       }
     }
     &__decoration {

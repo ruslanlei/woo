@@ -3,11 +3,12 @@
     <div class="feature-section__heading">
       Your eCommerce <br /> made simple
     </div>
-    <Container class="feature-section__container">
+    <Container size="md" class="feature-section__container">
       <ImageAnimator
-        :initialize="initializeAnimation"
+        :initialize="initializeAnimation && transitionEnded"
         pre-animation-type="drop"
         animation-type="defaultSlow"
+        class="feature-section__image-animator"
       >
         <template v-slot:default="slotProps">
           <template v-for="(feature, index) in features" :key="index">
@@ -15,7 +16,7 @@
               ...(index === 2 ? { enter } : {})
             }">
               <FeatureCard
-                v-if="percentageOfVisibility > 54 || transitionEnded"
+                v-if="initializeAnimation || transitionEnded"
                 :heading="feature.heading"
                 :text="feature.text"
                 :button-text="feature.buttonText"
@@ -29,8 +30,8 @@
                   v-for="(image, index) in feature.images"
                   :key="index"
                   :src="require(
-                  `@/assets/img/sections/features/${feature.name}/${image.filename}`
-                )"
+                    `@/assets/img/sections/features/${feature.name}/${image.filename}`
+                  )"
                   :class="[
                     [`image-animator__item-${slotProps.id}`],
                     ...feature.preAnimationItems.includes(image.name)
@@ -42,7 +43,8 @@
                     'feature-section__feature-image',
                     [`feature-section__feature-${feature.name}-image-${image.name}`]
                   ]"
-                >
+                  :alt="image.name"
+                />
               </FeatureCard>
             </transition>
           </template>
@@ -54,7 +56,6 @@
 
 <script>
 import SectionMixin from '@/mixins/SectionMixin';
-import Container from '@/components/Container/Container.vue';
 import FeatureCard from '@/components/FeatureCard/FeatureCard.vue';
 import ImageAnimator from '@/components/ImageAnimator/ImageAnimator.vue';
 
@@ -62,12 +63,10 @@ export default {
   name: 'FeaturesSection',
   mixins: [SectionMixin],
   components: {
-    Container,
     FeatureCard,
     ImageAnimator,
   },
   data: () => ({
-    initializeAnimation: false,
     transitionEnded: false,
     features: [
       {
@@ -139,9 +138,6 @@ export default {
   methods: {
     enter() {
       this.transitionEnded = true;
-      this.$nextTick(() => {
-        this.initializeAnimation = true;
-      });
     },
   },
 };
@@ -149,24 +145,27 @@ export default {
 
 <style lang="scss">
   .feature-section {
+    position: relative;
     overflow: hidden;
     height: 100vh;
     background: $color-white;
     @include content-centred;
     &__heading {
+      @include heading-dark;
       position: absolute;
       width: 100%;
       top: 0;
-      @include additional-font;
       text-align: center;
-      font-size: $text-xl;
-      color: $color-purple-deep;
-      font-weight: bold;
     }
     &__container {
       margin-top: 80px;
       @include content-centred;
       min-width: 1601px;
+    }
+    &__image-animator {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     &__feature-image {
       position: absolute;
@@ -176,15 +175,6 @@ export default {
     }
     &__feature {
       position: relative;
-      margin: 0 35px;
-      &:first-child {
-        margin-right: 35px;
-        margin-left: 0;
-      }
-      &:last-child {
-        margin-right: 0;
-        margin-left: 35px;
-      }
       &-start {
         top: -90px;
         &-image {
