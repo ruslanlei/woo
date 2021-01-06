@@ -2,6 +2,8 @@ $xs: 480;
 $sm: 768;
 $md: 992;
 $lg: 1287;
+$xl: 1680;
+$xxl: 1920;
 
 @mixin tighter($size) {
   @media (max-width: #{$size}px) {
@@ -106,6 +108,30 @@ $lg: 1287;
 @mixin desktop {
   @media only screen {
     @include wider($lg) {
+      @content;
+    }
+  }
+}
+
+@mixin wide-desktop {
+  @media only screen {
+    @include wider($xl) {
+      @content;
+    }
+  }
+}
+
+@mixin tighter-than-wide-desktop {
+  @media only screen {
+    @include tighter($xl) {
+      @content;
+    }
+  }
+}
+
+@mixin tighter-than-full-hd {
+  @media only screen {
+    @include tighter($xxl) {
       @content;
     }
   }

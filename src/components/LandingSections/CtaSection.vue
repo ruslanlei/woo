@@ -36,7 +36,7 @@ export default {
     @include content-centred;
     &__text {
       max-width: 855px;
-      font-size: $text-lg;
+      @include text-lg;
       color: $color-white;
       &-bold {
         font-weight: bold;

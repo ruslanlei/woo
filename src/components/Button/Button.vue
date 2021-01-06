@@ -42,9 +42,11 @@ export default {
     ("lg", 26, 62, 18, 21),
 ) {
   .button-size__#{$size} {
-    font-size: $fs + px;
-    line-height: $lh + px;
     padding: $v + px $h + px;
+    @include text-sm;
+    @include tighter-than-wide-desktop {
+      padding: $v - 3 + px $h - 3 + px;
+    }
   }
 }
 

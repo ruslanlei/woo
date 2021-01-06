@@ -196,7 +196,7 @@ export default {
       @include content-centred;
       &-text {
         margin-left: 15px;
-        font-size: $text-md;
+        @include text-md;
         color: $color-white;
       }
     }
@@ -234,12 +234,12 @@ export default {
     }
     &__column {
       &-heading {
-        font-size: $text-xs;
+        @include text-xs;
         color: $color-white;
         font-weight: bold;
       }
       &-link {
-        font-size: $text-xxs;
+        @include text-xxs;
         color: $color-white;
         margin-top: 8px;
         &:first-child {

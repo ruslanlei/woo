@@ -78,7 +78,7 @@ export default {
       margin-top: 33px;
     }
     &__text {
-      font-size: $text-sm;
+      @include text-sm;
       margin-top: 31px;
       max-width: 660px;
       text-align: center;

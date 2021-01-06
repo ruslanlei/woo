@@ -8,7 +8,8 @@
       <ImageAnimator
         class="additional-features-section__image-animator"
         :initialize="initializeAnimation && transitionEnded"
-        animation-type="flashes"
+        pre-animation-type="growth"
+        animation-type="default"
       >
         <template v-slot:default="slotProps">
           <img
@@ -27,13 +28,13 @@
           >
         </template>
       </ImageAnimator>
-      <div>
+      <div class="additional-features-section__card-container">
         <template v-for="(feature, index) in features" :key="index">
           <transition
             name="additional-cards"
             v-on="{
-            ...(index === 1 ? { enter } : {})
-          }"
+              ...(index === 1 ? { enter } : {})
+            }"
           >
             <FeatureCard
               v-if="initializeAnimation || transitionEnded"
@@ -42,9 +43,9 @@
               :button-text="feature.buttonText"
               :style="{'--i': index}"
               :class="[
-              'additional-features-section__feature',
-               [`additional-features-section__feature-${feature.name}`]
-            ]"
+                'additional-features-section__feature',
+                 [`additional-features-section__feature-${feature.name}`]
+              ]"
               :type="!(index % 2) ? 'additional' : 'additional-reverse'"
             >
               <img
@@ -52,8 +53,22 @@
                 :key="index"
                 :src="require(
                 // eslint-disable-next-line max-len
-                `@/assets/img/sections/additional-features/features/${feature.name}/${image.filename}`
-              )"
+                  `@/assets/img/sections/additional-features/features/${feature.name}/${image.filename}`
+                )"
+                :class="[
+                   [`additional-features-section__feature-${feature.name}-image`]
+                ]"
+              >
+              <img
+                v-for="(image, index) in feature.images"
+                :key="index"
+                :src="require(
+                // eslint-disable-next-line max-len
+                  `@/assets/img/sections/additional-features/features/${feature.name}/${image.filename}`
+                )"
+                :class="[
+                   [`additional-features-section__feature-${feature.name}-image-bg`]
+                ]"
               >
             </FeatureCard>
           </transition>
@@ -135,17 +150,60 @@ export default {
     @include content-centred;
     background: $color-purple;
     height: 100vh;
+    max-height: 1110px;
+    @include tighter-than-wide-desktop {
+      max-height: 900px;
+    }
     &__feature {
+      @include tighter-than-wide-desktop {
+        max-width: 780px;
+      }
       &-develop {
         position: absolute;
         top: -30px;
         left: 0;
         margin-bottom: 55px;
+        &-image {
+          position: relative;
+          z-index: 2;
+          width: 430px;
+          @include tighter-than-wide-desktop {
+            width: 320px;
+          }
+        }
+        &-image-bg {
+          position: absolute;
+          z-index: 1;
+          top: 40px;
+          filter: blur(20px) drop-shadow(-25px 20px 44px rgba(84, 48, 209, 0.4));
+          transform: scale(0.9);
+          @include tighter-than-wide-desktop {
+            width: 320px;
+          }
+        }
       }
       &-community {
         position: absolute;
         bottom: -30px;
         right: 0;
+        &-image {
+          width: 430px;
+          position: relative;
+          z-index: 2;
+          @include tighter-than-wide-desktop {
+            width: 320px;
+          }
+        }
+        &-image-bg {
+          position: absolute;
+          z-index: 1;
+          top: 40px;
+          filter: blur(20px) drop-shadow(-25px 20px 44px rgba(84, 48, 209, 0.4));
+          transform: scale(0.9);
+          @include tighter-than-wide-desktop {
+            width: 320px;
+          }
+        }
       }
     }
     &__decoration {
@@ -179,6 +237,8 @@ export default {
     &__container {
       position: relative;
       height: 100%;
+      display: flex;
+      @include content-centred;
     }
     &__features-image-animator {
       display: flex;
@@ -221,6 +281,14 @@ export default {
           right: -10%;
           top: 0;
         }
+      }
+    }
+    &__card-container {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      @include tighter-than-wide-desktop {
+        max-width: 900px;
       }
     }
   }

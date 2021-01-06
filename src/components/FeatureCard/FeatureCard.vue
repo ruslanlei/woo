@@ -1,10 +1,12 @@
 <template>
-  <div :class="{
-    'feature-card': true,
-    'feature-card--primary': type === 'primary',
-    'feature-card--additional': type === 'additional',
-    'feature-card--additional-reverse': type === 'additional-reverse'
-  }">
+  <div
+    :class="{
+      'feature-card': true,
+      'feature-card--primary': type === 'primary',
+      'feature-card--additional': type === 'additional',
+      'feature-card--additional-reverse': type === 'additional-reverse'
+    }"
+  >
     <div class="feature-card__img-container">
       <slot />
     </div>
@@ -79,6 +81,9 @@ export default {
 <style lang="scss">
   .feature-card {
     max-width: 431px;
+    @include tighter-than-wide-desktop {
+      max-width: 350px;
+    }
     &--primary {
       .feature-card__img-container {
         height: 293px;
@@ -98,7 +103,10 @@ export default {
       }
       .feature-card__info {
         margin-left: 70px;
-        padding-bottom: 75px;
+        padding-bottom: 40px;
+        @include tighter-than-wide-desktop {
+          margin-left: 60px;
+        }
       }
       .feature-card__heading {
         color: $color-white;
@@ -106,6 +114,10 @@ export default {
       .feature-card__text {
         color: $color-white;
         margin-top: 15px;
+        @include tighter-than-wide-desktop {
+          line-height: 24px;
+          margin-top: 20px;
+        }
       }
       .feature-card__button {
         border-radius: 37px;
@@ -119,18 +131,22 @@ export default {
       .feature-card__img-container {
         max-width: 430px;
         max-height: 571px;
-        @include content-centred;
-      }
-      .feature-card__img-container {
         margin-left: 70px;
+        @include content-centred;
+        @include tighter-than-wide-desktop {
+          margin-left: 60px;
+        }
       }
       .feature-card__heading {
         color: $color-white;
-        line-height: 46px;
       }
       .feature-card__text {
         color: $color-white;
         margin-top: 15px;
+        @include tighter-than-wide-desktop {
+          line-height: 24px;
+          margin-top: 20px;
+        }
       }
       .feature-card__button {
         border-radius: 37px;
@@ -142,21 +158,27 @@ export default {
       @include content-centred;
     }
     &__heading {
-      font-size: $text-lg;
+      @include text-lg;
       line-height: 70px;
       font-weight: bold;
       @include additional-font;
       margin-top: 40px;
     }
     &__text {
-      font-size: $text-sm;
+      @include text-sm;
       line-height: 30px;
       margin-top: 5px;
       color: $color-grey-2;
+      @include tighter-than-wide-desktop {
+        margin-top: 20px;
+      }
     }
     &__button {
       line-height: 25px;
       margin-top: 25px;
+      @include tighter-than-wide-desktop {
+        margin-top: 20px;
+      }
     }
   }
 </style>

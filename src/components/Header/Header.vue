@@ -6,18 +6,23 @@
         :src="require('@/assets/img/logo.svg')"
         alt="Logo"
       >
-      <Button
-        v-for="nav in navItems"
-        :key="nav.name"
-        :class="{
-          'header__button-transparent': true,
-          'push-right': !!nav.pushRight,
-        }"
-        size="sm"
-        state="purple-transparent"
-      >
-        {{ nav.text }}
-      </Button>
+      <div class="header__nav">
+        <Button
+          v-for="nav in navItems"
+          :key="nav.name"
+          :class="{
+            'header__button-transparent': true,
+          }"
+          size="sm"
+          :state="
+            activeSection === 'AdditionalFeaturesSection'
+              ? 'white-transparent'
+              : 'purple-transparent'
+          "
+        >
+          {{ nav.text }}
+        </Button>
+      </div>
       <Button state="purple-transparent" size="sm">Log in</Button>
       <Button
         class="header__button-get-started"
@@ -46,6 +51,7 @@ export default {
   },
   data() {
     return {
+      hideHeader: true,
       navItems: [
         {
           name: 'sell',
@@ -66,7 +72,6 @@ export default {
         {
           name: 'resources',
           text: 'Resources',
-          pushRight: true,
         },
       ],
     };
@@ -77,40 +82,43 @@ export default {
       activeSection: 'getActiveSection',
     }),
     computedClasses() {
-      switch (this.activeSection) {
-        case 'WelcomeSection':
-          return {
-            header: true,
-            'header--white-transparent': this.pageYOffset > 300 && this.pageYOffset <= 800,
-            'header--white': this.pageYOffset > 800,
-          };
-        case 'FeaturesSection':
-          return {
-            header: true,
-            'header--white': this.pageYOffset > 800,
-          };
-        case 'AdditionalFeaturesSection':
-        case 'CtaSection':
-        case 'Footer':
-          return {
-            header: true,
-            'header--purple': true,
-          };
-        case 'TestimonialsSection':
-          return {
-            header: true,
-            'header--white': true,
-          };
-        case 'PeopleSection':
-          return {
-            header: true,
-            'header--white': true,
-          };
-        default:
-          return {
-            header: true,
-          };
-      }
+      const classes = {
+        header: true,
+        'header--hidden': this.hideHeader && this.pageYOffset > 200,
+      };
+      const addClasses = {
+        WelcomeSection: {
+          'header--white-transparent': this.pageYOffset > 300 && this.pageYOffset <= 800,
+          'header--white': this.pageYOffset > 800,
+        },
+        FeaturesSection: {
+          'header--white': this.pageYOffset > 800,
+        },
+        AdditionalFeaturesSection: {
+          'header--purple': true,
+        },
+        TestimonialsSection: {
+          'header--white': true,
+        },
+        PeopleSection: {
+          'header--white': true,
+        },
+        CtaSection: {
+          'header--purple': true,
+        },
+        Footer: {
+          'header--purple': true,
+        },
+      };
+      return {
+        ...classes,
+        ...addClasses[this.activeSection],
+      };
+    },
+  },
+  watch: {
+    pageYOffset(newVal, oldVal) {
+      this.hideHeader = newVal > oldVal;
     },
   },
 };
@@ -122,11 +130,26 @@ export default {
     z-index: 100;
     top: 0;
     width: 100%;
-    padding: 37px 0;
-    transition: .3s;
+    height: 120px;
+    transition: .3s background-color, .3s transform;
+    @include tighter-than-wide-desktop {
+      height: 86px;
+      padding: 0 30px;
+    }
+    &--hidden {
+      transform: translateY(-120px);
+      @include tighter-than-wide-desktop {
+        transform: translateY(-86px);
+      }
+    }
+    &__nav {
+      display: flex;
+      margin-right: auto;
+    }
     &--white-transparent {
       backdrop-filter: blur(20px);
       background: rgba($color-blue-light, 0.9);
+      box-shadow: 0 1px 2px rgba(black, 0.1);
     }
     &--white {
       backdrop-filter: blur(20px);
@@ -136,22 +159,25 @@ export default {
     &--purple {
       backdrop-filter: blur(20px);
       background: rgba($color-purple, 0.9);
+      box-shadow: 0 1px 2px rgba(black, 0.1);
     }
     &-filled {
       background: $color-white;
     }
     &__logo {
       margin-right: 144px;
+      @include tighter-than-wide-desktop {
+        margin-right: 60px;
+        width: 140px;
+      }
     }
     &__container {
       display: flex;
       align-items: center;
+      height: 100%;
     }
     &__button-get-started {
       border-radius: 5px;
     }
-  }
-  .push-right {
-    margin-right: auto;
   }
 </style>

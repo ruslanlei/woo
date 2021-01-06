@@ -320,7 +320,7 @@ export default {
       width: 730px;
       min-width: 730px;
       min-height: 391px;
-      font-size: $text-xm;
+      @include text-xm;
       padding: 0 82px;
       text-align: center;
       line-height: 39.5px;

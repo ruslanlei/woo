@@ -4,8 +4,8 @@
       <img
         v-if="componentVisible"
         :src="require('@/assets/img/sections/welcome/w-letter.svg')"
-        class="welcome-section__background-letter"
         alt="background-letter"
+        class="welcome-section__background-letter"
       >
       <div class="welcome-section__columns-wrapper">
         <div class="welcome-section__column welcome-section__column-left">
@@ -84,6 +84,7 @@
 import SectionMixin from '@/mixins/SectionMixin';
 import Button from '@/components/Button/Button.vue';
 import ImageAnimator from '@/components/ImageAnimator/ImageAnimator.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'WelcomeSection',
@@ -121,6 +122,11 @@ export default {
       },
     ],
   }),
+  computed: {
+    ...mapGetters({
+      pageYOffset: 'getPageYOffset',
+    }),
+  },
 };
 </script>
 
@@ -128,6 +134,7 @@ export default {
   .welcome-section {
     position: relative;
     height: 100vh;
+    max-height: 1400px;
     background: $color-gradient-blue;
     overflow: hidden;
     z-index: 1;
@@ -137,17 +144,22 @@ export default {
       right: -643px;
       width: 1767px;
       height: 1666px;
+      @include tighter-than-wide-desktop {
+        transform: scale(0.76);
+      }
     }
     &__container {
       position: relative;
       height: 100%;
+      @include tighter-than-wide-desktop {
+        padding: 0 160px;
+      }
     }
     &__columns-wrapper {
       @include content-centred;
       height: 100%;
       position: relative;
       z-index: 2;
-      //padding: 0 165px;
     }
     &__column {
       width: 50%;
@@ -158,24 +170,30 @@ export default {
     &__column-right {
       @include content-centred;
       height: 500px;
+      @include tighter-than-wide-desktop {
+        transform: scale(0.8);
+      }
     }
     &__image-animator {
       &-image {
         position: absolute;
         &-shoes {
-          right: -400px;
+          left: 100px;
           z-index: 2;
+          width: 907px;
         }
         &-girls {
           z-index: 3;
           top: -20px;
-          left: 0;
+          left: 40px;
           border-radius: 20px;
+          width: 254px;
         }
         &-payments {
           z-index: 3;
           bottom: -130px;
-          left: 160px;
+          left: 200px;
+          width: 406px;
         }
         &-dots-grid-horizontal {
           opacity: 0.5;
@@ -235,15 +253,21 @@ export default {
     }
     &__main-heading {
       @include additional-font;
-      font-size: $text-xxl;
+      @include text-xxl;
       font-weight: bold;
       color: $color-purple-deep;
       max-width: 818px;
+      @include tighter-than-wide-desktop {
+        max-width: 770px;
+      }
     }
     &__main-heading-description {
       margin-top: 29px;
       max-width: 716px;
       color: $color-grey-2;
+      @include tighter-than-wide-desktop {
+        max-width: 700px;
+      }
     }
   }
 </style>

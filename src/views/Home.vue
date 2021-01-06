@@ -34,7 +34,6 @@ export default {
   .homepage {
     &__section {
       position: relative;
-      max-height: 1400px;
     }
     &__welcome-section {
       z-index: 1;
@@ -44,7 +43,6 @@ export default {
     }
     &__additional-features-section {
       z-index: 3;
-      max-height: 1110px;
     }
     &__testimonials-section {
       z-index: 4;

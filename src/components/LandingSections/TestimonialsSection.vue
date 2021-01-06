@@ -83,7 +83,7 @@ export default {
       rgba(236, 240, 253, 0.43) 84.33%,
       rgba(236, 240, 253, 0) 100%
     );
-    height: 100vh;
+    height: 1400px;
     &__container {
       position: relative;
       height: 100%;

@@ -41,7 +41,7 @@
                         ]
                       : [],
                     'feature-section__feature-image',
-                    [`feature-section__feature-${feature.name}-image-${image.name}`]
+                    [`feature-section__feature-${feature.name}-image-${image.name}`],
                   ]"
                   :alt="image.name"
                 />
@@ -148,6 +148,8 @@ export default {
     position: relative;
     overflow: hidden;
     height: 100vh;
+    max-height: 1100px;
+    min-height: 900px;
     background: $color-white;
     @include content-centred;
     &__heading {
@@ -166,9 +168,13 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      @include tighter-than-wide-desktop {
+        max-width: 1200px;
+      }
     }
     &__feature-image {
       position: absolute;
+      box-shadow: 0px 18px 52.8537px rgba(215, 228, 249, 0.5);
       &-pre-animated {
         opacity: 0;
       }
@@ -178,65 +184,146 @@ export default {
       &-start {
         top: -90px;
         &-image {
-          &-payment {}
+          &-payment {
+            border-radius: 17px;
+            width: 430px;
+            @include tighter-than-wide-desktop {
+              width: 350px;
+            }
+          }
           &-apple-pay {
             z-index: 3;
-            left: -100px;
-            top: 0;
+            left: -70px;
+            top: -10px;
+            width: 55px;
           }
           &-payment-settings {
             z-index: 2;
-            left: -170px;
-            bottom: -90px;
+            left: -110px;
+            top: 40px;
+            width: 220px;
+            border-radius: 10px;
+            @include tighter-than-wide-desktop {
+              width: 180px;
+              left: -100px;
+              top: 50px;
+            }
           }
         }
       }
       &-customize {
         &-image {
-          &-phone {}
+          &-phone {
+            border-radius: 17px;
+            width: 430px;
+            @include tighter-than-wide-desktop {
+              width: 350px;
+            }
+          }
           &-facebook {
-            left: -10px;
             z-index: 2;
+            width: 105px;
+            border-radius: 10px;
+            left: 40px;
+            @include tighter-than-wide-desktop {
+              width: 85px;
+              border-radius: 5px;
+              left: 30px;
+            }
           }
           &-google {
-            bottom: -80px;
+            bottom: -30px;
             z-index: 2;
+            width: 105px;
+            border-radius: 10px;
+            @include tighter-than-wide-desktop {
+              width: 85px;
+              border-radius: 5px;
+              bottom: -2px;
+            }
           }
           &-jetpack {
             z-index: 2;
-            right: 40px;
-            top: 90px;
+            right: 100px;
+            top: 140px;
+            width: 105px;
+            border-radius: 10px;
+            @include tighter-than-wide-desktop {
+              width: 85px;
+              border-radius: 5px;
+              right: 80px;
+              top: 140px;
+            }
           }
           &-mail-chimp {
             z-index: 2;
-            right: -10px;
-            top: -35px;
+            right: 35px;
+            top: 22px;
+            width: 105px;
+            border-radius: 10px;
+            @include tighter-than-wide-desktop {
+              width: 85px;
+              border-radius: 5px;
+              right: 35px;
+              top: 38px;
+            }
           }
           &-square {
-            top: -90px;
-            left: -10px;
+            top: -50px;
+            left: 40px;
             z-index: 2;
+            width: 105px;
+            border-radius: 10px;
+            @include tighter-than-wide-desktop {
+              width: 85px;
+              border-radius: 5px;
+              left: 30px;
+              top: -15px;
+            }
           }
         }
       }
       &-community {
         bottom: -90px;
         &-image {
-          &-employe {}
-          &-girls {
-            right: -110px;
-            bottom: 10px;
-            z-index: 2;
-          }
-          &-laptop {
-            top: -100px;
-            left: 0;
-            z-index: 2;
+          &-employe {
+            border-radius: 17px;
+            width: 430px;
+            @include tighter-than-wide-desktop {
+              width: 350px;
+            }
           }
           &-people {
-            top: -180px;
-            right: -10px;
+            top: -130px;
+            right: 50px;
             z-index: 2;
+            width: 114px;
+            @include tighter-than-wide-desktop {
+              width: 106px;
+              top: -90px;
+            }
+          }
+          &-laptop {
+            top: -50px;
+            left: 40px;
+            z-index: 2;
+            width: 140px;
+            @include tighter-than-wide-desktop {
+              width: 120px;
+              top: -20px;
+              left: 20px;
+            }
+          }
+          &-girls {
+            right: -60px;
+            bottom: 50px;
+            z-index: 2;
+            width: 170px;
+            @include tighter-than-wide-desktop {
+              width: 150px;
+              right: -70px;
+              bottom: 70px;
+            }
           }
         }
       }
