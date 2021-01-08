@@ -11,7 +11,7 @@
         class="feature-section__image-animator"
       >
         <template v-slot:default="slotProps">
-          <template v-for="(feature, index) in features" :key="index">
+          <div v-for="(feature, index) in features" :key="index">
             <transition name="cards" v-on="{
               ...(index === 2 ? { enter } : {})
             }">
@@ -22,9 +22,9 @@
                 :button-text="feature.buttonText"
                 :style="{'--i': index}"
                 :class="[
-                'feature-section__feature',
-                [`feature-section__feature-${feature.name}`]
-              ]"
+                  'feature-section__feature',
+                  [`feature-section__feature-${feature.name}`]
+                ]"
               >
                 <img
                   v-for="(image, index) in feature.images"
@@ -32,22 +32,22 @@
                   :src="require(
                     `@/assets/img/sections/features/${feature.name}/${image.filename}`
                   )"
-                  :class="[
-                    [`image-animator__item-${slotProps.id}`],
-                    ...feature.preAnimationItems.includes(image.name)
-                      ? [
-                          [`image-animator__pre-animation-item-${slotProps.id}`],
-                          'feature-section__feature-image-pre-animated',
-                        ]
-                      : [],
-                    'feature-section__feature-image',
-                    [`feature-section__feature-${feature.name}-image-${image.name}`],
-                  ]"
+                  :class="{
+                    [`image-animator__item-${slotProps.id}`]: true,
+                    ...(feature.preAnimationItems.includes(image.name)
+                      ? {
+                          [`image-animator__pre-animation-item-${slotProps.id}`]: true,
+                          'feature-section__feature-image-pre-animated': true,
+                        } : {}),
+                    'feature-section__feature-image': true,
+                    'feature-section__feature-image--with-shadow': shadowActive,
+                    [`feature-section__feature-${feature.name}-image-${image.name}`]: true
+                  }"
                   :alt="image.name"
                 />
               </FeatureCard>
             </transition>
-          </template>
+          </div>
         </template>
       </ImageAnimator>
     </Container>
@@ -68,6 +68,7 @@ export default {
   },
   data: () => ({
     transitionEnded: false,
+    shadowActive: false,
     features: [
       {
         name: 'start',
@@ -138,6 +139,9 @@ export default {
   methods: {
     enter() {
       this.transitionEnded = true;
+      setTimeout(() => {
+        this.shadowActive = true;
+      }, 1700);
     },
   },
 };
@@ -168,13 +172,17 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      max-width: 1500px;
       @include tighter-than-wide-desktop {
         max-width: 1200px;
       }
     }
     &__feature-image {
       position: absolute;
-      box-shadow: 0px 18px 52.8537px rgba(215, 228, 249, 0.5);
+      transition: .7s box-shadow;
+      &--with-shadow {
+        box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
+      }
       &-pre-animated {
         opacity: 0;
       }

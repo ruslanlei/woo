@@ -99,10 +99,12 @@ export default {
     }
     &__image-animator {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
+      @include tighter-than-wide-desktop {
+        width: 85%;
+        height: 85%;
+      }
       &-image {
         position: absolute;
         opacity: 0;

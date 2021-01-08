@@ -6,26 +6,24 @@
       for building
       <span class="cta-section__text-bold">your online business.</span>
     </div>
-    <Button
+    <q-btn
       class="cta-section__button"
-      state="white-transparent"
-      size="xs"
+      color="secondary"
+      outline
+      padding="20px 40px"
+      style="border-radius: 40px"
     >
       GET STARTED
-    </Button>
+    </q-btn>
   </div>
 </template>
 
 <script>
 import SectionMixin from '@/mixins/SectionMixin';
-import Button from '@/components/Button/Button.vue';
 
 export default {
   name: 'CtaSection',
   mixins: [SectionMixin],
-  components: {
-    Button,
-  },
 };
 </script>
 
@@ -34,6 +32,9 @@ export default {
     background: $color-purple-medium;
     height: 261px;
     @include content-centred;
+    @include tighter-than-wide-desktop {
+      height: 180px;
+    }
     &__text {
       max-width: 855px;
       @include text-lg;

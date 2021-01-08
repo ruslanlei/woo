@@ -17,15 +17,28 @@
             Get started quickly and make your way.
           </div>
           <div class="welcome-section__row">
-            <Button
+            <q-btn
               class="welcome-section__button-start"
-              size="lg"
-              state="purple"
+              color="primary"
+              no-caps
+              padding="20px 64px"
+              style="border-radius: 60px"
             >
               Start a New Store
-            </Button>
-            <div class="welcome-section__row-divider">or</div>
-            <Button state="blue-transparent">Customize & Extend ›</Button>
+            </q-btn>
+            <div class="welcome-section__row-divider">
+              or
+            </div>
+            <q-btn
+              class="welcome-section__button-customize"
+              color="transparent"
+              flat
+              no-caps
+              text-color="info"
+              padding="0 6px"
+            >
+              Customize & Extend ›
+            </q-btn>
           </div>
           </div>
         <div class="welcome-section__column welcome-section__column-right">
@@ -49,29 +62,18 @@
                 "
                 :alt="image.name"
               >
-              <Button
+              <q-btn
                 v-for="button in buttons"
                 :key="button.name"
+                unelevated
                 :class="[
                   [`image-animator__item-${slotProps.id}`],
                   [`image-animator__pre-animation-item-${slotProps.id}`],
                   'welcome-section__image-animator-button',
                   [`welcome-section__image-animator-button-${button.name}`]
                 ]"
-                :state="button.state"
-                size="sm"
-                :is-rounded="true"
-              >
-                <template v-if="button.content">
-                  {{ button.content }}
-                </template>
-                <template v-else-if="button.icon">
-                  <img
-                    :src="require(`@/assets/icons/${button.icon}.svg`)"
-                    alt=""
-                  >
-                </template>
-              </Button>
+                v-bind="button.attrs"
+              />
             </template>
           </ImageAnimator>
         </div>
@@ -82,7 +84,6 @@
 
 <script>
 import SectionMixin from '@/mixins/SectionMixin';
-import Button from '@/components/Button/Button.vue';
 import ImageAnimator from '@/components/ImageAnimator/ImageAnimator.vue';
 import { mapGetters } from 'vuex';
 
@@ -90,7 +91,6 @@ export default {
   name: 'WelcomeSection',
   mixins: [SectionMixin],
   components: {
-    Button,
     ImageAnimator,
   },
   data: () => ({
@@ -108,17 +108,34 @@ export default {
       {
         name: 'sale',
         state: 'green',
-        content: 'S A L E',
+        attrs: {
+          label: 'S A L E',
+          rounded: true,
+          color: 'positive',
+          padding: '6px 33px',
+        },
       },
       {
         name: 'shield',
         state: 'red',
-        icon: 'protect-shield',
+        attrs: {
+          icon: 'verified_user',
+          rounded: true,
+          color: 'negative',
+          size: 'lg',
+          padding: '10px 23px',
+        },
       },
       {
         name: 'cart',
         state: 'yellow',
-        icon: 'cart',
+        attrs: {
+          icon: 'add_shopping_cart',
+          rounded: true,
+          color: 'warning',
+          size: 'lg',
+          padding: '11px',
+        },
       },
     ],
   }),
@@ -139,13 +156,27 @@ export default {
     overflow: hidden;
     z-index: 1;
     &__background-letter {
+      $letter-width: 1767px;
+      $shift: -$letter-width / 2.5;
+
       position: fixed;
-      top: -664px;
-      right: -643px;
-      width: 1767px;
-      height: 1666px;
+      top: $shift;
+      right: $shift;
+      width: $letter-width;
       @include tighter-than-wide-desktop {
-        transform: scale(0.76);
+        width: $letter-width * 0.76;
+        top: $shift * 0.76;
+        right: $shift * 0.76;
+      }
+      @include tighter-than-desktop {
+        width: $letter-width * 0.6;
+        top: $shift * 0.6;
+        right: $shift * 0.6;
+      }
+      @include tighter(1100) {
+        width: $letter-width * 0.4;
+        top: $shift * 0.2;
+        right: $shift * 0.6;
       }
     }
     &__container {
@@ -154,86 +185,175 @@ export default {
       @include tighter-than-wide-desktop {
         padding: 0 160px;
       }
+      @include tighter-than-desktop {
+        padding: 0 120px;
+      }
+      @include tighter(1100) {
+        padding: 0 92px;
+      }
+      @include tighter-than-tablet {
+        padding: 0 50px;
+      }
+      @include mobile {
+        padding: 0 18px;
+      }
     }
     &__columns-wrapper {
       @include content-centred;
       height: 100%;
       position: relative;
       z-index: 2;
+      @include tighter(1100) {
+        justify-content: flex-start;
+      }
     }
     &__column {
       width: 50%;
     }
     &__column-left {
+      position: relative;
+      z-index: 2;
       width: 70%;
+      @include tighter(1100) {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+      }
     }
     &__column-right {
+      $animator-h: 500px;
+      margin-right: 40px;
       @include content-centred;
-      height: 500px;
+      height: $animator-h;
       @include tighter-than-wide-desktop {
-        transform: scale(0.8);
+        height: $animator-h * 0.8;
+      }
+      @include tighter-than-desktop {
+        height: $animator-h * 0.6;
+      }
+      @include tighter(1100) {
+        position: absolute;
+        z-index: 1;
+        right: -36%;
+      }
+      @include tighter-than-tablet {
+        right: 0;
+        opacity: 0.09;
+      }
+      @include mobile {
+        display: none;
       }
     }
     &__image-animator {
+
+      $img-shoes-w: 907px;
+      $img-girls-w: 254px;
+      $img-payments-w: 406px;
+      $img-dots-grid-horizontal-w: 552px;
+      $img-dots-grid-vertical-w: 250px;
+      $img-dots-grid-vertical-purple-w: 250px;
+
       &-image {
         position: absolute;
         &-shoes {
-          left: 100px;
+          left: 10%;
           z-index: 2;
-          width: 907px;
+          width: $img-shoes-w;
+          @include tighter-than-wide-desktop {
+            width: $img-shoes-w * 0.8;
+          }
+          @include tighter-than-desktop {
+            width: $img-shoes-w * 0.6;
+          }
         }
         &-girls {
           z-index: 3;
-          top: -20px;
-          left: 40px;
+          top: -5%;
+          left: 6%;
           border-radius: 20px;
-          width: 254px;
+          width: $img-girls-w;
+          @include tighter-than-wide-desktop {
+            width: $img-girls-w * 0.8;
+          }
+          @include tighter-than-desktop {
+            width: $img-girls-w * 0.6;
+          }
         }
         &-payments {
           z-index: 3;
-          bottom: -130px;
-          left: 200px;
-          width: 406px;
+          bottom: -20%;
+          left: 28%;
+          width: $img-payments-w;
+          @include tighter-than-wide-desktop {
+            width: $img-payments-w * 0.8;
+          }
+          @include tighter-than-desktop {
+            width: $img-payments-w * 0.6;
+          }
         }
         &-dots-grid-horizontal {
           opacity: 0.5;
           z-index: 1;
-          top: 70px;
-          left: -40px;
+          top: 17%;
+          left: -7%;
+          width: $img-dots-grid-horizontal-w;
+          @include tighter-than-wide-desktop {
+            width: $img-dots-grid-horizontal-w * 0.8;
+          }
+          @include tighter-than-desktop {
+            width: $img-dots-grid-horizontal-w * 0.6;
+          }
         }
         &-dots-grid-vertical {
           opacity: 0.5;
           z-index: 1;
-          top: -110px;
-          right: -20px;
+          top: -22%;
+          right: -3%;
+          width: $img-dots-grid-vertical-w;
+          @include tighter-than-wide-desktop {
+            width: $img-dots-grid-vertical-w * 0.8;
+          }
+          @include tighter-than-desktop {
+            width: $img-dots-grid-vertical-w * 0.6;
+          }
         }
         &-dots-grid-vertical-purple {
           opacity: 0.5;
           z-index: 1;
-          bottom: -160px;
-          right: -180px;
+          bottom: -28%;
+          right: -26%;
+          width: $img-dots-grid-vertical-purple-w;
+          @include tighter-than-wide-desktop {
+            width: $img-dots-grid-vertical-purple-w * 0.8;
+          }
+          @include tighter-than-desktop {
+            width: $img-dots-grid-vertical-purple-w * 0.6;
+          }
         }
       }
       &-button {
-        position: absolute;
+        position: absolute !important;
         z-index: 3;
+        @include tighter-than-desktop {
+          display: none;
+        }
         &-sale {
           width: 147px;
           height: 54px;
-          top: 20px;
-          right: 100px;
+          top: 5%;
+          right: 16%;
           border-radius: 37px;
         }
         &-shield {
           width: 98px;
           height: 68px;
-          right: -130px;
+          right: -17%;
           bottom: 0;
           border-radius: 31px;
         }
         &-cart {
-          left: 70px;
-          bottom: 60px;
+          left: 11%;
+          bottom: 10%;
           width: 75px;
           height: 75px;
           border-radius: 37px;
@@ -244,12 +364,26 @@ export default {
       display: flex;
       align-items: center;
       margin-top: 31px;
+      @include mobile {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
     &__button-start {
       border-radius: 60px;
     }
+    &__button-customize {
+      @include mobile {
+        padding: 16px 34px;
+      }
+    }
     &__row-divider {
-      margin: 0 12px;
+      margin-left: 24px;
+      margin-right: 12px;
+      @include text-sm;
+      @include mobile {
+        display: none;
+      }
     }
     &__main-heading {
       @include additional-font;
@@ -258,15 +392,22 @@ export default {
       color: $color-purple-deep;
       max-width: 818px;
       @include tighter-than-wide-desktop {
-        max-width: 770px;
+        max-width: 750px;
+      }
+      @include tighter(1100) {
+        max-width: 600px;
+      }
+      @include mobile {
+        margin-top: 45px;
       }
     }
     &__main-heading-description {
       margin-top: 29px;
       max-width: 716px;
       color: $color-grey-2;
+      @include text-sm;
       @include tighter-than-wide-desktop {
-        max-width: 700px;
+        max-width: 600px;
       }
     }
   }

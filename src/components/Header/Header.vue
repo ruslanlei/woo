@@ -1,5 +1,5 @@
 <template>
-  <div :class="computedClasses">
+  <div class="header" :class="[[`header--${headerState}`]]">
     <Container class="header__container">
       <img
         class="header__logo"
@@ -7,47 +7,49 @@
         alt="Logo"
       >
       <div class="header__nav">
-        <Button
+        <q-btn
           v-for="nav in navItems"
           :key="nav.name"
-          :class="{
-            'header__button-transparent': true,
-          }"
-          size="sm"
-          :state="
-            activeSection === 'AdditionalFeaturesSection'
-              ? 'white-transparent'
-              : 'purple-transparent'
-          "
+          unelevated
+          no-caps
+          flat
+          :color="buttonsState"
         >
           {{ nav.text }}
-        </Button>
+        </q-btn>
       </div>
-      <Button state="purple-transparent" size="sm">Log in</Button>
-      <Button
-        class="header__button-get-started"
-        state="purple"
-        size="sm"
+      <q-btn
+        flat
+        :color="buttonsState"
+        no-caps
+      >
+        Log in
+      </q-btn>
+      <q-btn
+        color="primary"
+        no-caps
+        style="margin-left: 6px"
       >
         Get started
-      </Button>
-      <SearchElement />
+      </q-btn>
+      <q-btn
+        flat
+        :color="buttonsState"
+        icon="search"
+        style="margin-left: 6px"
+      />
     </Container>
   </div>
 </template>
 
 <script>
 import Container from '@/components/Container/Container.vue';
-import Button from '@/components/Button/Button.vue';
-import SearchElement from '@/components/SearchElement/SearchElement.vue';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'Header',
   components: {
     Container,
-    Button,
-    SearchElement,
   },
   data() {
     return {
@@ -81,39 +83,35 @@ export default {
       pageYOffset: 'getPageYOffset',
       activeSection: 'getActiveSection',
     }),
-    computedClasses() {
-      const classes = {
-        header: true,
-        'header--hidden': this.hideHeader && this.pageYOffset > 200,
-      };
-      const addClasses = {
-        WelcomeSection: {
-          'header--white-transparent': this.pageYOffset > 300 && this.pageYOffset <= 800,
-          'header--white': this.pageYOffset > 800,
-        },
-        FeaturesSection: {
-          'header--white': this.pageYOffset > 800,
-        },
-        AdditionalFeaturesSection: {
-          'header--purple': true,
-        },
-        TestimonialsSection: {
-          'header--white': true,
-        },
-        PeopleSection: {
-          'header--white': true,
-        },
-        CtaSection: {
-          'header--purple': true,
-        },
-        Footer: {
-          'header--purple': true,
-        },
-      };
-      return {
-        ...classes,
-        ...addClasses[this.activeSection],
-      };
+    buttonsState() {
+      switch (this.headerState) {
+        case 'purple':
+          return 'secondary';
+        default:
+          return 'accent';
+      }
+    },
+    headerState() {
+      const section = this.activeSection;
+      const offset = this.pageYOffset;
+      switch (section) {
+        case 'WelcomeSection':
+          if (offset > 300 && offset <= 800) return 'white-transparent';
+          if (offset > 800) return 'white';
+          break;
+        case 'FeaturesSection':
+        case 'PeopleSection':
+          return 'white';
+        case 'AdditionalFeaturesSection':
+        case 'CtaSection':
+        case 'Footer':
+          return 'purple';
+        case 'TestimonialsSection':
+          return 'white-transparent';
+        default:
+          return null;
+      }
+      return null;
     },
   },
   watch: {
@@ -126,15 +124,19 @@ export default {
 
 <style lang="scss">
   .header {
+    $header-h: 120px;
     position: fixed;
     z-index: 100;
     top: 0;
     width: 100%;
-    height: 120px;
+    height: $header-h;
     transition: .3s background-color, .3s transform;
     @include tighter-than-wide-desktop {
-      height: 86px;
+      height: $header-h * 0.8;
       padding: 0 30px;
+    }
+    @include tablet-or-tighter {
+      height: $header-h * 0.5;
     }
     &--hidden {
       transform: translateY(-120px);
@@ -143,8 +145,10 @@ export default {
       }
     }
     &__nav {
-      display: flex;
       margin-right: auto;
+      height: 100%;
+      position: relative;
+      @include content-centred;
     }
     &--white-transparent {
       backdrop-filter: blur(20px);
@@ -175,9 +179,6 @@ export default {
       display: flex;
       align-items: center;
       height: 100%;
-    }
-    &__button-get-started {
-      border-radius: 5px;
     }
   }
 </style>

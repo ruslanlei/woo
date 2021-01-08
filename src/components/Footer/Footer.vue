@@ -59,7 +59,15 @@
                 v-for="(link, index) in columns[column]"
                 :key="index"
               >
-                {{ link.name }}
+                <q-btn
+                  :key="index"
+                  size="sm"
+                  color="secondary"
+                  flat
+                  padding="0 4px"
+                >
+                  {{ link.name }}
+                </q-btn>
               </div>
             </div>
           </div>
@@ -69,26 +77,42 @@
     <div class="footer__bottom-section">
       <Container size="md" class="footer__bottom-section-container">
         <div class="footer__bottom-section-column">
-          <img
-            class="footer__bottom-section-icon"
-            :src="require('@/assets/img/footer/social/twitter.svg')"
-            alt="twitter"
+          <q-btn
+            flat
           >
-          <img
-            class="footer__bottom-section-icon"
-            :src="require('@/assets/img/footer/social/facebook.svg')"
-            alt="facebook"
+            <img
+              class="footer__bottom-section-icon"
+              :src="require('@/assets/img/footer/social/twitter.svg')"
+              alt="twitter"
+            >
+          </q-btn>
+          <q-btn
+            flat
           >
-          <img
-            class="footer__bottom-section-icon"
-            :src="require('@/assets/img/footer/social/wifi.svg')"
-            alt="wifi"
+            <img
+              class="footer__bottom-section-icon"
+              :src="require('@/assets/img/footer/social/facebook.svg')"
+              alt="facebook"
+            >
+          </q-btn>
+          <q-btn
+            flat
           >
-          <img
-            class="footer__bottom-section-icon"
-            :src="require('@/assets/img/footer/social/instagram.svg')"
-            alt="instagram"
+            <img
+              class="footer__bottom-section-icon"
+              :src="require('@/assets/img/footer/social/wifi.svg')"
+              alt="wifi"
+            >
+          </q-btn>
+          <q-btn
+            flat
           >
+            <img
+              class="footer__bottom-section-icon"
+              :src="require('@/assets/img/footer/social/instagram.svg')"
+              alt="instagram"
+            >
+          </q-btn>
         </div>
         <div class="footer__bottom-section-column">
           COPYRIGHT WOOCOMMERCE 2020 - TERMS & CONDITIONS  PRIVACY POLICY

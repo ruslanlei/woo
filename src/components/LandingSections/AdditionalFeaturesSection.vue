@@ -29,7 +29,7 @@
         </template>
       </ImageAnimator>
       <div class="additional-features-section__card-container">
-        <template v-for="(feature, index) in features" :key="index">
+        <div v-for="(feature, index) in features" :key="index">
           <transition
             name="additional-cards"
             v-on="{
@@ -72,7 +72,7 @@
               >
             </FeatureCard>
           </transition>
-        </template>
+        </div>
       </div>
     </Container>
   </div>
@@ -174,7 +174,7 @@ export default {
         &-image-bg {
           position: absolute;
           z-index: 1;
-          top: 40px;
+          bottom: -40px;
           filter: blur(20px) drop-shadow(-25px 20px 44px rgba(84, 48, 209, 0.4));
           transform: scale(0.9);
           @include tighter-than-wide-desktop {
@@ -197,7 +197,7 @@ export default {
         &-image-bg {
           position: absolute;
           z-index: 1;
-          top: 40px;
+          bottom: -40px;
           filter: blur(20px) drop-shadow(-25px 20px 44px rgba(84, 48, 209, 0.4));
           transform: scale(0.9);
           @include tighter-than-wide-desktop {
@@ -217,7 +217,6 @@ export default {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        overflow: hidden;
       }
       &-top, &-bottom {
         position: absolute;

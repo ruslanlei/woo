@@ -33,18 +33,24 @@
     <div class="card-slider__card card-slider__card-bottom" />
     <div class="card-slider__card card-slider__card-bottom-phantom" />
     <div class="card-slider__controls">
-      <div class="card-slider__controls-button">
+      <q-btn
+        unelevated
+        class="card-slider__controls-button"
+      >
         <img
           :src="require('@/assets/img/sections/testimonials/arrow-left.svg')"
           @click="showPrev"
         />
-      </div>
-      <div class="card-slider__controls-button">
+      </q-btn>
+      <q-btn
+        unelevated
+        class="card-slider__controls-button"
+      >
         <img
           :src="require('@/assets/img/sections/testimonials/arrow-right.svg')"
           @click="showNext"
         />
-      </div>
+      </q-btn>
     </div>
   </div>
 </template>
@@ -121,9 +127,9 @@ export default {
           { value: 0, duration: 0 },
         ],
         translateY: [
-          { value: '-180px', duration: 0 },
+          { value: '-46%', duration: 0 },
           { value: 0, duration: this.animationDuration },
-          { value: '-180px', duration: 0 },
+          { value: '-46%', duration: 0 },
         ],
         easing: 'easeInOutQuad',
         complete: () => {
@@ -141,7 +147,7 @@ export default {
         ],
         translateY: [
           { value: 0, duration: 0 },
-          { value: '70px', duration: this.animationDuration },
+          { value: '18%', duration: this.animationDuration },
           { value: 0, duration: 0 },
         ],
         easing: 'easeInOutQuad',
@@ -158,9 +164,9 @@ export default {
           { value: 0.9, duration: 0 },
         ],
         translateY: [
-          { value: '70px', duration: 0 },
-          { value: '140px', duration: this.animationDuration },
-          { value: '70px', duration: 0 },
+          { value: '18%', duration: 0 },
+          { value: '36%', duration: this.animationDuration },
+          { value: '18%', duration: 0 },
         ],
         easing: 'easeInOutQuad',
         complete: () => {
@@ -179,9 +185,9 @@ export default {
           { value: 1, duration: 0 },
         ],
         translateY: [
-          { value: '140px', duration: 0 },
-          { value: '100px', duration: this.animationDuration },
-          { value: '140px', duration: 0 },
+          { value: '36%', duration: 0 },
+          { value: '26%', duration: this.animationDuration },
+          { value: '36%', duration: 0 },
         ],
         easing: 'easeInOutQuad',
         complete: () => {
@@ -209,7 +215,7 @@ export default {
         ],
         translateY: [
           { value: 0, duration: 0 },
-          { value: '-180px', duration: this.animationDuration },
+          { value: '-46%', duration: this.animationDuration },
           { value: 0, duration: 0 },
         ],
         easing: 'easeInOutQuad',
@@ -227,9 +233,9 @@ export default {
           { value: 0.9, duration: 0 },
         ],
         translateY: [
-          { value: '70px', duration: 0 },
+          { value: '18%', duration: 0 },
           { value: 0, duration: this.animationDuration },
-          { value: '70px', duration: 0 },
+          { value: '18%', duration: 0 },
         ],
         easing: 'easeInOutQuad',
         complete: () => {
@@ -245,9 +251,9 @@ export default {
           { value: 0.8, duration: 0 },
         ],
         translateY: [
-          { value: '140px', duration: 0 },
-          { value: '70px', duration: this.animationDuration },
-          { value: '140px', duration: 0 },
+          { value: '36%', duration: 0 },
+          { value: '18%', duration: this.animationDuration },
+          { value: '36%', duration: 0 },
         ],
         easing: 'easeInOutQuad',
         complete: () => {
@@ -266,9 +272,9 @@ export default {
           { value: 0, duration: 0 },
         ],
         translateY: [
-          { value: '100px', duration: 0 },
-          { value: '140px', duration: this.animationDuration },
-          { value: '100px', duration: 0 },
+          { value: '26%', duration: 0 },
+          { value: '36%', duration: this.animationDuration },
+          { value: '26%', duration: 0 },
         ],
         easing: 'easeInOutQuad',
         complete: () => {
@@ -309,17 +315,27 @@ export default {
 </script>
 
 <style lang="scss">
+
+  $card-width: 730px;
+  $card-height: 391px;
+  $card-container-height: 530px;
+
   .card-slider {
-    width: 730px;
-    height: 530px;
+    width: $card-width;
+    height: $card-container-height;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
+    @include tighter-than-wide-desktop {
+      width: $card-width * 0.8;
+      height: $card-container-height * 0.8;
+    }
     &__card {
-      width: 730px;
-      min-width: 730px;
-      min-height: 391px;
+      width: $card-width;
+      min-width: $card-width;
+      height: $card-height;
+      min-height: $card-height;
       @include text-xm;
       padding: 0 82px;
       text-align: center;
@@ -327,6 +343,12 @@ export default {
       color: $color-grey-2;
       @include content-centred;
       user-select: none;
+      @include tighter-than-wide-desktop {
+        width: $card-width * 0.8;
+        min-width: $card-width * 0.8;
+        height: $card-height * 0.8;
+        min-height: $card-height * 0.8;
+      }
       &-quotes {
         top: 30px;
         position: absolute;
@@ -338,7 +360,7 @@ export default {
       &-top-phantom {
         position: absolute;
         top: 0;
-        transform: translateY(-180px);
+        transform: translateY(-46%);
         background: $color-white;
         opacity: 0;
         border-radius: 20px;
@@ -356,7 +378,7 @@ export default {
       &-mid {
         position: absolute;
         border-radius: 20px;
-        transform: scale(0.9) translateY(70px);
+        transform: scale(0.9) translateY(18%);
         background: $color-white;
         box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
         z-index: 3;
@@ -364,7 +386,7 @@ export default {
       &-bottom {
         position: absolute;
         border-radius: 20px;
-        transform: scale(0.8) translateY(140px);
+        transform: scale(0.8) translateY(36%);
         background: $color-white;
         box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
         z-index: 2;
@@ -373,7 +395,8 @@ export default {
         position: absolute;
         border-radius: 20px;
         opacity: 0;
-        transform: scale(0.8) translateY(100px);
+        //transform: scale(0.8) translateY(100px);
+        transform: scale(0.8) translateY(26%);
         background: $color-white;
         box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
         z-index: 1;

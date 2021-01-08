@@ -17,24 +17,21 @@
       <div class="feature-card__text">
         {{ text }}
       </div>
-      <Button
-        class="feature-card__button"
-        v-bind="buttonProps"
-      >
-        {{ buttonText }}
-      </Button>
+      <div class="feature-card__button">
+        <q-btn
+          v-bind="buttonProps"
+          no-caps
+        >
+          Customize & Extend ›
+        </q-btn>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Button from '@/components/Button/Button.vue';
-
 export default {
   name: 'FeatureCard',
-  components: {
-    Button,
-  },
   props: {
     heading: {
       type: String,
@@ -58,20 +55,20 @@ export default {
       switch (this.type) {
         case 'primary':
           return {
-            state: 'blue-transparent',
+            textColor: 'info',
+            padding: '0 2px',
+            flat: true,
           };
         case 'additional':
-          return {
-            state: 'green',
-            size: 'xs',
-          };
         case 'additional-reverse':
           return {
-            state: 'green',
-            size: 'xs',
+            color: 'positive',
+            padding: '14px 28px',
+            unelevated: true,
+            style: 'border-radius: 60px',
           };
         default:
-          return 'blue-transparent';
+          return null;
       }
     },
   },
