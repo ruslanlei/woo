@@ -29,8 +29,9 @@
         </template>
       </ImageAnimator>
       <div class="additional-features-section__card-container">
-        <div v-for="(feature, index) in features" :key="index">
+        <template v-for="(feature, index) in features">
           <transition
+            :key="index"
             name="additional-cards"
             v-on="{
               ...(index === 1 ? { enter } : {})
@@ -72,7 +73,7 @@
               >
             </FeatureCard>
           </transition>
-        </div>
+        </template>
       </div>
     </Container>
   </div>
@@ -147,29 +148,30 @@ export default {
 
 <style lang="scss">
   .additional-features-section {
-    @include content-centred;
+    position: relative;
     background: $color-purple;
     height: 100vh;
-    max-height: 1110px;
-    @include tighter-than-wide-desktop {
-      max-height: 900px;
+    @include content-centred;
+    @include scalable(max-height, 1110px);
+    @include tablet-or-tighter {
+      max-height: 100%;
+      height: auto;
+      padding: 100px 0;
     }
     &__feature {
-      @include tighter-than-wide-desktop {
-        max-width: 780px;
-      }
+      $image-w: 430px;
+
       &-develop {
         position: absolute;
-        top: -30px;
         left: 0;
-        margin-bottom: 55px;
+        @include scalable(top, -30px);
+        @include tablet-or-tighter {
+          position: relative;
+        }
         &-image {
           position: relative;
           z-index: 2;
-          width: 430px;
-          @include tighter-than-wide-desktop {
-            width: 320px;
-          }
+          @include scalable(width, $image-w);
         }
         &-image-bg {
           position: absolute;
@@ -177,22 +179,20 @@ export default {
           bottom: -40px;
           filter: blur(20px) drop-shadow(-25px 20px 44px rgba(84, 48, 209, 0.4));
           transform: scale(0.9);
-          @include tighter-than-wide-desktop {
-            width: 320px;
-          }
+          @include scalable(width, $image-w);
         }
       }
       &-community {
         position: absolute;
-        bottom: -30px;
         right: 0;
+        @include scalable(bottom, -30px);
+        @include tablet-or-tighter {
+          position: relative;
+        }
         &-image {
-          width: 430px;
           position: relative;
           z-index: 2;
-          @include tighter-than-wide-desktop {
-            width: 320px;
-          }
+          @include scalable(width, $image-w);
         }
         &-image-bg {
           position: absolute;
@@ -200,9 +200,7 @@ export default {
           bottom: -40px;
           filter: blur(20px) drop-shadow(-25px 20px 44px rgba(84, 48, 209, 0.4));
           transform: scale(0.9);
-          @include tighter-than-wide-desktop {
-            width: 320px;
-          }
+          @include scalable(width, $image-w);
         }
       }
     }
@@ -217,6 +215,7 @@ export default {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        overflow: hidden;
       }
       &-top, &-bottom {
         position: absolute;
@@ -238,6 +237,9 @@ export default {
       height: 100%;
       display: flex;
       @include content-centred;
+      @include tighter-than-wide-desktop {
+        max-width: 100%;
+      }
     }
     &__features-image-animator {
       display: flex;
@@ -251,6 +253,15 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
+      @include tighter-than-wide-desktop {
+        overflow: hidden;
+      }
+      @include tablet-or-tighter {
+        opacity: 0.3;
+      }
+      @include mobile {
+        display: none;
+      }
       &-image {
         position: absolute;
         &-circle {
@@ -286,8 +297,11 @@ export default {
       height: 100%;
       width: 100%;
       position: relative;
-      @include tighter-than-wide-desktop {
-        max-width: 900px;
+      @include scalable(max-width, 1080px);
+      @include tablet-or-tighter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
     }
   }

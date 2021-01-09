@@ -151,22 +151,24 @@ export default {
   .feature-section {
     position: relative;
     overflow: hidden;
-    height: 100vh;
-    max-height: 1100px;
-    min-height: 900px;
     background: $color-white;
+    padding: 100px 0;
     @include content-centred;
+    flex-direction: column;
+    @include wider-than-tablet {
+      min-height: 1100px;
+    }
     &__heading {
       @include heading-dark;
-      position: absolute;
       width: 100%;
       top: 0;
       text-align: center;
     }
     &__container {
-      margin-top: 80px;
       @include content-centred;
-      min-width: 1601px;
+      @include wider(620) {
+        margin-top: 180px;
+      }
     }
     &__image-animator {
       display: flex;
@@ -175,6 +177,18 @@ export default {
       max-width: 1500px;
       @include tighter-than-wide-desktop {
         max-width: 1200px;
+      }
+      @include tighter-than-desktop {
+        max-width: 900px;
+      }
+      @include tighter-than-tablet {
+        max-width: 860px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      @include tighter(620) {
+        flex-wrap: nowrap;
+        flex-direction: column;
       }
     }
     &__feature-image {
@@ -191,146 +205,267 @@ export default {
       position: relative;
       &-start {
         top: -90px;
+        @include tighter-than-tablet {
+          top: 0;
+        }
+        @include tighter(620) {
+          margin-top: 100px;
+        }
         &-image {
           &-payment {
+            $payment-w: 430px;
+
             border-radius: 17px;
-            width: 430px;
+            width: $payment-w;
             @include tighter-than-wide-desktop {
-              width: 350px;
+              width: $payment-w * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $payment-w * 0.6;
             }
           }
           &-apple-pay {
+            $apple-pay-width: 55px;
+            $apple-pay-left: -70px;
+
             z-index: 3;
             left: -70px;
             top: -10px;
-            width: 55px;
+            width: $apple-pay-width;
+            @include tighter-than-wide-desktop {
+              width: $apple-pay-width * 0.8;
+              left: $apple-pay-left * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $apple-pay-width * 0.6;
+              left: $apple-pay-left * 0.6;
+            }
           }
           &-payment-settings {
+            $payment-settings-w: 220px;
+            $payment-settings-top: 40px;
+            $payment-settings-left: -110px;
+
             z-index: 2;
-            left: -110px;
-            top: 40px;
-            width: 220px;
+            left: $payment-settings-left;
+            top: $payment-settings-top;
+            width: $payment-settings-w;
             border-radius: 10px;
             @include tighter-than-wide-desktop {
-              width: 180px;
-              left: -100px;
-              top: 50px;
+              width: $payment-settings-w * 0.8;
+              left: $payment-settings-left * 0.8;
+              top: $payment-settings-top * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $payment-settings-w * 0.6;
+              left: $payment-settings-left * 0.6;
+              top: $payment-settings-top * 0.6;
             }
           }
         }
       }
       &-customize {
+        @include tighter-than-tablet {
+          margin-left: 100px;
+        }
+        @include tighter(700) {
+          margin-left: 30px;
+        }
+        @include tighter(620) {
+          margin-left: 0;
+        }
+        @include tighter(620) {
+          margin-top: 100px;
+        }
         &-image {
+          $phone-w: 430px;
+          $cards-w: 105px;
           &-phone {
             border-radius: 17px;
-            width: 430px;
+            width: $phone-w;
             @include tighter-than-wide-desktop {
-              width: 350px;
+              width: $phone-w * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $phone-w * 0.6;
             }
           }
           &-facebook {
+            $fb-left: 40px;
+
             z-index: 2;
-            width: 105px;
             border-radius: 10px;
-            left: 40px;
+            width: $cards-w;
+            left: $fb-left;
             @include tighter-than-wide-desktop {
-              width: 85px;
+              width: $cards-w * 0.8;
               border-radius: 5px;
-              left: 30px;
+              left: $fb-left * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $cards-w * 0.6;
+              left: $fb-left * 0.6;
             }
           }
           &-google {
-            bottom: -30px;
+            $g-bottom: -30px;
+
+            bottom: $g-bottom;
             z-index: 2;
-            width: 105px;
+            width: $cards-w;
             border-radius: 10px;
             @include tighter-than-wide-desktop {
-              width: 85px;
+              width: $cards-w * 0.8;
               border-radius: 5px;
-              bottom: -2px;
+              bottom: $g-bottom * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $cards-w * 0.6;
+              bottom: $g-bottom * 0.6;
             }
           }
           &-jetpack {
+            $jetpack-right: 100px;
+            $jetpack-top: 140px;
+
             z-index: 2;
-            right: 100px;
-            top: 140px;
-            width: 105px;
+            right: $jetpack-right;
+            top: $jetpack-top;
+            width: $cards-w;
             border-radius: 10px;
             @include tighter-than-wide-desktop {
-              width: 85px;
+              width: $cards-w * 0.8;
               border-radius: 5px;
-              right: 80px;
-              top: 140px;
+              right: $jetpack-right * 0.8;
+              top: $jetpack-top * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $cards-w * 0.6;
+              right: $jetpack-right * 0.6;
+              top: $jetpack-top * 0.6;
             }
           }
           &-mail-chimp {
+            $mail-chimp-right: 35px;
+            $mail-chimp-top: 22px;
+
             z-index: 2;
             right: 35px;
             top: 22px;
-            width: 105px;
+            width: $cards-w;
             border-radius: 10px;
             @include tighter-than-wide-desktop {
-              width: 85px;
+              width: $cards-w * 0.8;
               border-radius: 5px;
-              right: 35px;
-              top: 38px;
+              right: $mail-chimp-right * 0.8;
+              top: $mail-chimp-top * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $cards-w * 0.6;
+              right: $mail-chimp-right * 0.6;
+              top: $mail-chimp-top * 0.6;
             }
           }
           &-square {
             top: -50px;
             left: 40px;
             z-index: 2;
-            width: 105px;
+            width: $cards-w;
             border-radius: 10px;
             @include tighter-than-wide-desktop {
-              width: 85px;
+              width: $cards-w * 0.8;
               border-radius: 5px;
               left: 30px;
               top: -15px;
+            }
+            @include tighter-than-desktop {
+              width: $cards-w * 0.6;
             }
           }
         }
       }
       &-community {
         bottom: -90px;
+        @include tighter-than-tablet {
+          bottom: 0;
+        }
+        @include tighter-than-tablet {
+          margin-top: 100px;
+        }
+        @include tighter(700) {
+          margin-top: 100px;
+        }
         &-image {
           &-employe {
+            $employe-w: 430px;
+
             border-radius: 17px;
-            width: 430px;
+            width: $employe-w;
             @include tighter-than-wide-desktop {
-              width: 350px;
+              width: $employe-w * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $employe-w * 0.6;
             }
           }
           &-people {
-            top: -130px;
-            right: 50px;
+            $people-w: 114px;
+            $people-top: -130px;
+            $people-right: 50px;
+
+            top: $people-top;
+            right: $people-right;
             z-index: 2;
-            width: 114px;
+            width: $people-w;
             @include tighter-than-wide-desktop {
-              width: 106px;
-              top: -90px;
+              width: $people-w * 0.8;
+              top: $people-top * 0.8;
+              right: $people-right * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $people-w * 0.6;
+              top: $people-top * 0.6;
+              right: $people-right * 0.6;
             }
           }
           &-laptop {
-            top: -50px;
-            left: 40px;
+            $laptop-w: 140px;
+            $laptop-top: -50px;
+            $laptop-left: 40px;
+
+            top: $laptop-top;
+            left: $laptop-left;
             z-index: 2;
-            width: 140px;
+            width: $laptop-w;
             @include tighter-than-wide-desktop {
-              width: 120px;
-              top: -20px;
-              left: 20px;
+              width: $laptop-w * 0.8;
+              top: $laptop-top * 0.8;
+              left: $laptop-left * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $laptop-w * 0.6;
+              top: $laptop-top * 0.6;
+              left: $laptop-left * 0.6;
             }
           }
           &-girls {
-            right: -60px;
-            bottom: 50px;
+            $girls-w: 170px;
+            $girls-right: -60px;
+            $girls-bottom: 50px;
+
+            right: $girls-right;
+            bottom: $girls-bottom;
             z-index: 2;
-            width: 170px;
+            width: $girls-w;
             @include tighter-than-wide-desktop {
-              width: 150px;
-              right: -70px;
-              bottom: 70px;
+              width: $girls-w * 0.8;
+              right: $girls-right * 0.8;
+              bottom: $girls-bottom * 0.8;
+            }
+            @include tighter-than-desktop {
+              width: $girls-w * 0.6;
+              right: $girls-right * 0.6;
+              bottom: $girls-bottom * 0.6;
             }
           }
         }

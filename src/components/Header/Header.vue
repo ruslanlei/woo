@@ -1,43 +1,68 @@
 <template>
-  <div class="header" :class="[[`header--${headerState}`]]">
+  <div class="header" :class="{
+    [`header--${headerState}`]: !!headerState
+  }">
     <Container class="header__container">
       <img
         class="header__logo"
         :src="require('@/assets/img/logo.svg')"
         alt="Logo"
       >
-      <div class="header__nav">
-        <q-btn
-          v-for="nav in navItems"
-          :key="nav.name"
-          unelevated
-          no-caps
-          flat
-          :color="buttonsState"
-        >
-          {{ nav.text }}
-        </q-btn>
-      </div>
       <q-btn
-        flat
-        :color="buttonsState"
-        no-caps
-      >
-        Log in
-      </q-btn>
-      <q-btn
-        color="primary"
-        no-caps
-        style="margin-left: 6px"
-      >
-        Get started
-      </q-btn>
-      <q-btn
-        flat
-        :color="buttonsState"
-        icon="search"
-        style="margin-left: 6px"
+        class="header__menu-button"
+        icon="menu"
+        unelevated
+        fab-mini
+        @click="switchMobileMenu"
       />
+      <div
+        class="header__content"
+        :class="{
+          'header__content--visible': isMenuOpen
+        }"
+      >
+        <div class="header__menu-button-back">
+          <q-btn
+            class="header__menu-button"
+            icon="arrow_forward"
+            unelevated
+            fab-mini
+            @click="switchMobileMenu"
+          />
+        </div>
+        <div class="header__nav">
+          <q-btn
+            v-for="nav in navItems"
+            :key="nav.name"
+            unelevated
+            no-caps
+            flat
+            :color="buttonsState"
+          >
+            {{ nav.text }}
+          </q-btn>
+        </div>
+        <div class="header__options">
+          <q-btn
+            flat
+            :color="buttonsState"
+            no-caps
+          >
+            Log in
+          </q-btn>
+          <q-btn
+            color="primary"
+            no-caps
+          >
+            Get started
+          </q-btn>
+          <q-btn
+            flat
+            :color="buttonsState"
+            icon="search"
+          />
+        </div>
+      </div>
     </Container>
   </div>
 </template>
@@ -76,7 +101,13 @@ export default {
           text: 'Resources',
         },
       ],
+      isMenuOpen: false,
     };
+  },
+  methods: {
+    switchMobileMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    },
   },
   computed: {
     ...mapGetters({
@@ -131,12 +162,56 @@ export default {
     width: 100%;
     height: $header-h;
     transition: .3s background-color, .3s transform;
+    @include scalable(height, $header-h);
     @include tighter-than-wide-desktop {
-      height: $header-h * 0.8;
       padding: 0 30px;
     }
-    @include tablet-or-tighter {
-      height: $header-h * 0.5;
+    @include tighter(1080) {
+      padding: 0 15px;
+    }
+    @include mobile {
+      padding: 0;
+    }
+    &__menu-button {
+      position: relative;
+      @include wider-than-tablet {
+        display: none !important;
+      }
+      &-back {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 2;
+        @include wider-than-tablet {
+          display: none !important;
+        }
+      }
+    }
+    &__content {
+      display: flex;
+      width: 100%;
+      @include tighter-than-tablet {
+        transition: .3s transform;
+        position: absolute;
+        top: 0;
+        right: -400px;
+        width: 400px;
+        height: 100vh;
+        flex-direction: column-reverse;
+        padding: 20px;
+        background: $color-white;
+        box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
+      }
+      @include mobile {
+        right: -100%;
+        width: 100%;
+        box-shadow: none;
+      }
+      &--visible {
+        @include tighter-than-tablet {
+          transform: translateX(-100%);
+        }
+      }
     }
     &--hidden {
       transform: translateY(-120px);
@@ -149,6 +224,16 @@ export default {
       height: 100%;
       position: relative;
       @include content-centred;
+      @include tighter-than-tablet {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+    &__options {
+      display: flex;
+      @include tighter-than-tablet {
+        flex-direction: column;
+      }
     }
     &--white-transparent {
       backdrop-filter: blur(20px);
@@ -174,11 +259,17 @@ export default {
         margin-right: 60px;
         width: 140px;
       }
+      @include tighter-than-tablet {
+        margin-right: auto;
+      }
     }
     &__container {
       display: flex;
       align-items: center;
       height: 100%;
+      @include mobile {
+        padding: 0 19px;
+      }
     }
   }
 </style>

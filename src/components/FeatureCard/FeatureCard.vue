@@ -77,13 +77,11 @@ export default {
 
 <style lang="scss">
   .feature-card {
-    max-width: 431px;
-    @include tighter-than-wide-desktop {
-      max-width: 350px;
-    }
+    $container-width: 430px;
+    @include scalable(max-width, $container-width);
     &--primary {
       .feature-card__img-container {
-        height: 293px;
+        @include scalable(height, 293px);
       }
       .feature-card__heading {
         color: $color-purple-deep;
@@ -92,17 +90,22 @@ export default {
     &--additional {
       display: flex;
       align-items: flex-end;
-      max-width: 980px;
+      @include scalable(max-width, 980px);
+      @include tablet-or-tighter {
+        flex-direction: column;
+        align-items: flex-start;
+        max-width: $container-width * 0.6;
+      }
       .feature-card__img-container {
-        max-width: 430px;
-        max-height: 571px;
+        @include scalable(max-width, $container-width);
+        @include scalable(max-height, 571px);
         @include content-centred;
       }
       .feature-card__info {
-        margin-left: 70px;
-        padding-bottom: 40px;
-        @include tighter-than-wide-desktop {
-          margin-left: 60px;
+        @include scalable(padding-bottom, 40px);
+        @include scalable(margin-left, 70px);
+        @include tablet-or-tighter {
+          margin-left: 0;
         }
       }
       .feature-card__heading {
@@ -110,40 +113,37 @@ export default {
       }
       .feature-card__text {
         color: $color-white;
-        margin-top: 15px;
-        @include tighter-than-wide-desktop {
-          line-height: 24px;
-          margin-top: 20px;
-        }
-      }
-      .feature-card__button {
-        border-radius: 37px;
+        @include scalable(margin-top, 15px);
+        @include scalable(line-height, 32px);
+        @include scalable(margin-top, 20px);
       }
     }
     &--additional-reverse {
       display: flex;
       align-items: flex-start;
       flex-direction: row-reverse;
-      max-width: 980px;
+      @include scalable(max-width, 980px);
+      @include tablet-or-tighter {
+        flex-direction: column;
+        max-width: $container-width * 0.6;
+      }
       .feature-card__img-container {
-        max-width: 430px;
-        max-height: 571px;
-        margin-left: 70px;
-        @include content-centred;
-        @include tighter-than-wide-desktop {
-          margin-left: 60px;
+        @include scalable(max-width, $container-width);
+        @include scalable(max-height, 571px);
+        @include scalable(margin-left, 70px);
+        @include tablet-or-tighter {
+          margin-left: 0;
         }
+        @include content-centred;
       }
       .feature-card__heading {
         color: $color-white;
       }
       .feature-card__text {
         color: $color-white;
-        margin-top: 15px;
-        @include tighter-than-wide-desktop {
-          line-height: 24px;
-          margin-top: 20px;
-        }
+        @include scalable(margin-top, 15px);
+        @include scalable(line-height, 32px);
+        @include scalable(margin-top, 20px);
       }
       .feature-card__button {
         border-radius: 37px;

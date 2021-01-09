@@ -1,4 +1,5 @@
 @import "animation";
+@import "../media";
 
 .search-input {
   @include enter-and-leave {
@@ -30,5 +31,8 @@
   @include active-class {
     transition: transform .5s, opacity .5s;
     transition-delay: calc( 0.1s * var(--i) );
+    @include mobile {
+      transition-delay: 0s;
+    }
   }
 }

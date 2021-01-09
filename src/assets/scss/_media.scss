@@ -83,15 +83,7 @@ $xxl: 1920;
 
 @mixin wider-than-tablet {
   @media only screen {
-    @include tighter($md) {
-      @content;
-    }
-  }
-}
-
-@mixin wider-than-tablet {
-  @media only screen {
-    @include tighter($md) {
+    @include wider($md) {
       @content;
     }
   }
@@ -134,5 +126,28 @@ $xxl: 1920;
     @include tighter($xxl) {
       @content;
     }
+  }
+}
+
+@mixin scalable($prop, $val) {
+  #{$prop}: $val;
+  @include tighter-than-wide-desktop {
+    #{$prop}: $val * 0.8;
+  }
+  @include tighter-than-desktop {
+    #{$prop}: $val * 0.6;
+  }
+}
+
+@mixin max-scalable($prop, $val) {
+  #{$prop}: $val;
+  @include tighter-than-wide-desktop {
+    #{$prop}: $val * 0.8;
+  }
+  @include tighter-than-desktop {
+    #{$prop}: $val * 0.6;
+  }
+  @include mobile {
+    #{$prop}: $val * 0.4;
   }
 }

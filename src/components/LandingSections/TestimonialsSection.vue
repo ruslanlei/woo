@@ -27,6 +27,7 @@
         </template>
       </ImageAnimator>
       <CardSlider
+        class="testimonials-section__card-slider"
         :animation-duration="400"
         :comments-list="commentsList"
         :autoplay="true"
@@ -83,11 +84,16 @@ export default {
       rgba(236, 240, 253, 0.43) 84.33%,
       rgba(236, 240, 253, 0) 100%
     );
-    height: 1400px;
+    @include scalable(height, 1300px);
     &__container {
       position: relative;
       height: 100%;
       @include content-centred;
+      @include mobile {
+        height: auto;
+        padding: 100px 0;
+        flex-direction: column;
+      }
     }
     &__heading {
       @include heading-dark;
@@ -96,50 +102,70 @@ export default {
       top: 14%;
       max-width: 570px;
       text-align: center;
+      @include mobile {
+       position: relative;
+      }
     }
     &__image-animator {
       position: absolute;
       width: 100%;
       height: 100%;
-      @include tighter-than-wide-desktop {
+      @include tighter-than-desktop {
+        opacity: 0.4;
         width: 85%;
         height: 85%;
+      }
+      @include tighter-than-subTablet {
+        display: none;
       }
       &-image {
         position: absolute;
         opacity: 0;
         &-employe-1 {
-          top: 20%;
-          left: 18%;
+          @include scalable(top, 20%);
+          @include scalable(left, 18%);
+          @include scalable(width, 136px);
         }
         &-employe-2 {
-          top: 16%;
-          right: 20%;
+          @include scalable(top, 16%);
+          @include scalable(right, 20%);
+          @include scalable(width, 94px);
         }
         &-employe-3 {
-          top: 36%;
-          right: 8%;
+          @include scalable(top, 36%);
+          @include scalable(right, 8%);
+          @include scalable(width, 154px);
         }
         &-employe-4 {
-          bottom: 26%;
-          right: 16%;
+          @include scalable(bottom, 26%);
+          @include scalable(right, 16%);
+          @include scalable(width, 89px);
         }
         &-employe-5 {
-          bottom: 30%;
-          left: 12%;
+          @include scalable(bottom, 30%);
+          @include scalable(left, 12%);
+          @include scalable(width, 105px);
         }
         &-employe-6 {
-          top: 38%;
-          left: 6%;
+          @include scalable(top, 38%);
+          @include scalable(left, 6%);
+          @include scalable(width, 93px);
         }
         &-dots-grid-red {
-          top: 34%;
-          right: 22%;
+          @include scalable(top, 34%);
+          @include scalable(right, 22%);
+          @include scalable(width, 472px);
         }
         &-dots-grid-green {
-          bottom: 28%;
-          left: 22%;
+          @include scalable(bottom, 28%);
+          @include scalable(left, 22%);
+          @include scalable(width, 472px);
         }
+      }
+    }
+    &__card-slider {
+      @include mobile {
+        margin-top: 40px;
       }
     }
   }

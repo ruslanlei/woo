@@ -321,37 +321,33 @@ export default {
   $card-container-height: 530px;
 
   .card-slider {
-    width: $card-width;
-    height: $card-container-height;
+    @include max-scalable(width, $card-width);
+    @include max-scalable(height, $card-container-height);
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    @include tighter-than-wide-desktop {
-      width: $card-width * 0.8;
-      height: $card-container-height * 0.8;
+    @include mobile {
+      height: $card-container-height * 0.4 + 30px;
     }
     &__card {
-      width: $card-width;
-      min-width: $card-width;
-      height: $card-height;
-      min-height: $card-height;
-      @include text-xm;
-      padding: 0 82px;
-      text-align: center;
-      line-height: 39.5px;
-      color: $color-grey-2;
+      @include max-scalable(width, $card-width);
+      @include max-scalable(min-width, $card-width);
+      @include max-scalable(height, $card-height);
+      @include max-scalable(min-height, $card-height);
+      @include max-scalable(border-radius, 20px);
+      @include max-scalable(padding-left, 82px);
+      @include max-scalable(padding-right, 82px);
+      @include max-scalable(font-size, $font-size-xm);
+      @include max-scalable(line-height, $font-size-xm + 3px);
       @include content-centred;
+      color: $color-grey-2;
+      text-align: center;
       user-select: none;
-      @include tighter-than-wide-desktop {
-        width: $card-width * 0.8;
-        min-width: $card-width * 0.8;
-        height: $card-height * 0.8;
-        min-height: $card-height * 0.8;
-      }
       &-quotes {
-        top: 30px;
         position: absolute;
+        @include max-scalable(top, 30px);
+        @include max-scalable(width, 168px);
       }
       &-text {
         position: relative;
@@ -363,7 +359,6 @@ export default {
         transform: translateY(-46%);
         background: $color-white;
         opacity: 0;
-        border-radius: 20px;
         box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
         z-index: 5;
       }
@@ -371,13 +366,11 @@ export default {
         position: absolute;
         top: 0;
         background: $color-white;
-        border-radius: 20px;
         box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
         z-index: 4;
       }
       &-mid {
         position: absolute;
-        border-radius: 20px;
         transform: scale(0.9) translateY(18%);
         background: $color-white;
         box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
@@ -385,7 +378,6 @@ export default {
       }
       &-bottom {
         position: absolute;
-        border-radius: 20px;
         transform: scale(0.8) translateY(36%);
         background: $color-white;
         box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
@@ -393,9 +385,7 @@ export default {
       }
       &-bottom-phantom {
         position: absolute;
-        border-radius: 20px;
         opacity: 0;
-        //transform: scale(0.8) translateY(100px);
         transform: scale(0.8) translateY(26%);
         background: $color-white;
         box-shadow: 0 18px 52.8537px rgba(215, 228, 249, 0.5);
@@ -409,18 +399,14 @@ export default {
       width: 100%;
       position: absolute;
       bottom: 0;
-      padding-right: 90px;
       height: 40px;
-      &-button {
-        transition: .2s;
-        user-select: none;
-        padding: 0 15px;
-        height: 100%;
-        @include content-centred;
-        &:hover {
-          cursor: pointer;
-        }
+      @include max-scalable(padding-right, 90px);
+      @include max-scalable(padding-top, 15px);
+      @include mobile {
+        padding: 0;
+        justify-content: center;
       }
+
     }
   }
 </style>

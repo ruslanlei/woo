@@ -173,7 +173,7 @@ export default {
         top: $shift * 0.6;
         right: $shift * 0.6;
       }
-      @include tighter(1100) {
+      @include mobile {
         width: $letter-width * 0.4;
         top: $shift * 0.2;
         right: $shift * 0.6;
@@ -364,16 +364,18 @@ export default {
       display: flex;
       align-items: center;
       margin-top: 31px;
-      @include mobile {
+      @include tablet-or-tighter {
         flex-direction: column;
         align-items: flex-start;
+        margin-top: 18px;
       }
     }
     &__button-start {
       border-radius: 60px;
     }
     &__button-customize {
-      @include mobile {
+      margin: 10px 16px;
+      @include tablet-or-tighter {
         padding: 16px 34px;
       }
     }
@@ -381,7 +383,7 @@ export default {
       margin-left: 24px;
       margin-right: 12px;
       @include text-sm;
-      @include mobile {
+      @include tablet-or-tighter {
         display: none;
       }
     }
@@ -399,6 +401,7 @@ export default {
       }
       @include mobile {
         margin-top: 45px;
+        letter-spacing: -3px;
       }
     }
     &__main-heading-description {

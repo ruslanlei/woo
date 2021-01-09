@@ -30,101 +30,41 @@ $font-size-xxs: 12px;
 }
 
 @mixin text-xxl {
-  font-size: $font-size-xxl;
-  line-height: $font-size-xxl + 3px;
-  @include tighter-than-wide-desktop {
-    font-size: $font-size-xl;
-    line-height: $font-size-xl + 3px;
-  }
-  @include tighter-than-desktop {
-    font-size: $font-size-lg;
-    line-height: $font-size-lg + 3px;
-  }
-  @include mobile {
-    font-size: $font-size-lg * 0.9;
-    line-height: $font-size-lg * 0.9;
-  }
+  @include scalable(font-size, $font-size-xxl);
+  @include scalable(line-height, $font-size-xxl + 3px);
 }
 
 @mixin text-xl {
-  font-size: $font-size-xl;
-  line-height: $font-size-xl + 3px;
-  @include tighter-than-wide-desktop {
-    font-size: $font-size-lg;
-    line-height: $font-size-lg + 3px;
-  }
-  @include tighter-than-desktop {
-    font-size: $font-size-xm;
-    line-height: $font-size-xm + 3px;
-  }
+  @include scalable(font-size, $font-size-xl);
+  @include scalable(line-height, $font-size-xl + 3px);
 }
 
 @mixin text-lg {
-  font-size: $font-size-lg;
-  line-height: $font-size-lg + 3px;
-  @include tighter-than-wide-desktop {
-    font-size: $font-size-xm;
-    line-height: $font-size-xm + 3px;
-  }
-  @include tighter-than-desktop {
-    font-size: $font-size-md;
-    line-height: $font-size-md + 3px;
-  }
+  @include scalable(font-size, $font-size-lg);
+  @include scalable(line-height, $font-size-lg + 3px);
 }
 
 @mixin text-xm {
-  font-size: $font-size-xm;
-  line-height: $font-size-xm + 3px;
-  @include tighter-than-wide-desktop {
-    font-size: $font-size-md;
-    line-height: $font-size-md + 3px;
-  }
-  @include tighter-than-desktop {
-    font-size: $font-size-sm;
-    line-height: $font-size-sm + 3px;
-  }
+  @include scalable(font-size, $font-size-xm);
+  @include scalable(line-height, $font-size-xm + 3px);
 }
 
 @mixin text-md {
-  font-size: $font-size-md;
-  line-height: $font-size-md + 3px;
-  @include tighter-than-wide-desktop {
-    font-size: $font-size-sm;
-    line-height: $font-size-sm + 3px;
-  }
-  @include tighter-than-desktop {
-    font-size: $font-size-xs;
-    line-height: $font-size-xs + 3px;
-  }
+  @include scalable(font-size, $font-size-md);
+  @include scalable(line-height, $font-size-md + 3px);
 }
 
 @mixin text-sm {
-  font-size: $font-size-sm;
-  line-height: $font-size-sm + 3px;
-  @include tighter-than-wide-desktop {
-    font-size: $font-size-xs;
-    line-height: $font-size-xs + 3px;
-  }
-  @include tighter-than-desktop {
-    font-size: $font-size-xxs;
-    line-height: $font-size-xxs + 3px;
-  }
+  @include scalable(font-size, $font-size-sm);
+  @include scalable(line-height, $font-size-sm + 3px);
 }
 
 @mixin text-xs {
-  font-size: $font-size-xs;
-  line-height: $font-size-xs + 3px;
-  @include tighter-than-wide-desktop {
-    font-size: $font-size-xxs;
-    line-height: $font-size-xxs + 3px;
-  }
+  @include scalable(font-size, $font-size-xs);
+  @include scalable(line-height, $font-size-xs + 3px);
 }
 
 @mixin text-xxs {
-  font-size: $font-size-xxs;
-  line-height: $font-size-xxs + 3px;
-  @include tighter-than-wide-desktop {
-    font-size: $font-size-xxs;
-    line-height: $font-size-xxs + 3px;
-  }
+  @include scalable(font-size, $font-size-xxs);
+  @include scalable(line-height, $font-size-xxs + 3px);
 }
