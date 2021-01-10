@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "minify-images": "node imagemin.js"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -33,7 +34,11 @@
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-quasar": "~3.0.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "imagemin": "^7.0.1",
+    "imagemin-pngquant": "^9.0.1",
+    "imagemin-webp": "^6.0.0",
+    "require-context": "^1.1.0"
   },
   "eslintConfig": {
     "root": true,

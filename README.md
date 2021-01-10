@@ -10,6 +10,11 @@ yarn install
 yarn serve
 ```
 
+### Minify images
+```
+yarn minify-images
+```
+
 ### Compiles and minifies for production
 ```
 yarn build

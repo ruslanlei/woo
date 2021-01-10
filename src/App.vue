@@ -6,19 +6,17 @@
 
 <script>
 import MainLayout from '@/layouts/MainLayout.vue';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
   components: {
     MainLayout,
-    DefaultLayout,
   },
   methods: {
     ...mapActions({
       receivePageYOffset: 'receivePageYOffset',
-      handleBreakpoint: 'layout/HANDLE_LAYOUT_BREAKPOINT',
+      handleBreakpoint: 'layout/handleLayoutBreakpoint',
     }),
   },
   computed: {

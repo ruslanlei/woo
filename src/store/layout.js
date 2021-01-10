@@ -53,13 +53,13 @@ const getters = {
 };
 
 const mutations = {
-  SET_LAYOUT_BREAKPOINT(state, breakpoint) {
+  setLayoutBreakpoint(state, breakpoint) {
     state.breakpoint = breakpoint;
   },
 };
 
 const actions = {
-  HANDLE_LAYOUT_BREAKPOINT({ state, commit }) {
+  handleLayoutBreakpoint({ state, commit }) {
     const { innerWidth } = window;
 
     const matchingBreakpoints = bps.filter(([, [min, max]]) => (
@@ -73,7 +73,7 @@ const actions = {
       return;
     }
 
-    commit('SET_LAYOUT_BREAKPOINT', matchingBreakpoints[0][0]);
+    commit('setLayoutBreakpoint', matchingBreakpoints[0][0]);
   },
 };
 

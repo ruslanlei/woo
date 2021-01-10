@@ -5,7 +5,7 @@
     <AdditionalFeaturesSection class="homepage__section homepage__additional-features-section" />
     <TestimonialsSection class="homepage__section homepage__testimonials-section" />
     <PeopleSection class="homepage__section homepage__people-section" />
-    <CtaSection class="homepage__section homepage__cta-section"></CtaSection>
+    <CtaSection class="homepage__section homepage__cta-section" />
   </div>
 </template>
 
@@ -46,6 +46,12 @@ export default {
     }
     &__testimonials-section {
       z-index: 4;
+    }
+    &__people-section {
+      z-index: 5;
+    }
+    &__cta-section {
+      z-index: 6;
     }
   }
 </style>

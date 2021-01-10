@@ -61,7 +61,7 @@
                   require(`@/assets/img/sections/welcome/ImageAnimator/${image.filename}`)
                 "
                 :alt="image.name"
-              >
+              />
               <q-btn
                 v-for="button in buttons"
                 :key="button.name"
@@ -154,30 +154,13 @@ export default {
     max-height: 1400px;
     background: $color-gradient-blue;
     overflow: hidden;
-    z-index: 1;
     &__background-letter {
       $letter-width: 1767px;
       $shift: -$letter-width / 2.5;
-
       position: fixed;
-      top: $shift;
-      right: $shift;
-      width: $letter-width;
-      @include tighter-than-wide-desktop {
-        width: $letter-width * 0.76;
-        top: $shift * 0.76;
-        right: $shift * 0.76;
-      }
-      @include tighter-than-desktop {
-        width: $letter-width * 0.6;
-        top: $shift * 0.6;
-        right: $shift * 0.6;
-      }
-      @include mobile {
-        width: $letter-width * 0.4;
-        top: $shift * 0.2;
-        right: $shift * 0.6;
-      }
+      @include max-scalable(top, $shift);
+      @include max-scalable(right, $shift);
+      @include max-scalable(width, $letter-width);
     }
     &__container {
       position: relative;
@@ -223,14 +206,7 @@ export default {
     &__column-right {
       $animator-h: 500px;
       margin-right: 40px;
-      @include content-centred;
-      height: $animator-h;
-      @include tighter-than-wide-desktop {
-        height: $animator-h * 0.8;
-      }
-      @include tighter-than-desktop {
-        height: $animator-h * 0.6;
-      }
+      @include scalable(height, $animator-h);
       @include tighter(1100) {
         position: absolute;
         z-index: 1;
@@ -245,90 +221,46 @@ export default {
       }
     }
     &__image-animator {
-
-      $img-shoes-w: 907px;
-      $img-girls-w: 254px;
-      $img-payments-w: 406px;
-      $img-dots-grid-horizontal-w: 552px;
-      $img-dots-grid-vertical-w: 250px;
-      $img-dots-grid-vertical-purple-w: 250px;
-
       &-image {
         position: absolute;
         &-shoes {
           left: 10%;
           z-index: 2;
-          width: $img-shoes-w;
-          @include tighter-than-wide-desktop {
-            width: $img-shoes-w * 0.8;
-          }
-          @include tighter-than-desktop {
-            width: $img-shoes-w * 0.6;
-          }
+          @include scalable(width, 907px);
         }
         &-girls {
           z-index: 3;
           top: -5%;
           left: 6%;
           border-radius: 20px;
-          width: $img-girls-w;
-          @include tighter-than-wide-desktop {
-            width: $img-girls-w * 0.8;
-          }
-          @include tighter-than-desktop {
-            width: $img-girls-w * 0.6;
-          }
+          @include scalable(width, 254px);
         }
         &-payments {
           z-index: 3;
           bottom: -20%;
           left: 28%;
-          width: $img-payments-w;
-          @include tighter-than-wide-desktop {
-            width: $img-payments-w * 0.8;
-          }
-          @include tighter-than-desktop {
-            width: $img-payments-w * 0.6;
-          }
+          @include scalable(width, 406px);
         }
         &-dots-grid-horizontal {
           opacity: 0.5;
           z-index: 1;
           top: 17%;
           left: -7%;
-          width: $img-dots-grid-horizontal-w;
-          @include tighter-than-wide-desktop {
-            width: $img-dots-grid-horizontal-w * 0.8;
-          }
-          @include tighter-than-desktop {
-            width: $img-dots-grid-horizontal-w * 0.6;
-          }
+          @include scalable(width, 552px);
         }
         &-dots-grid-vertical {
           opacity: 0.5;
           z-index: 1;
           top: -22%;
           right: -3%;
-          width: $img-dots-grid-vertical-w;
-          @include tighter-than-wide-desktop {
-            width: $img-dots-grid-vertical-w * 0.8;
-          }
-          @include tighter-than-desktop {
-            width: $img-dots-grid-vertical-w * 0.6;
-          }
+          @include scalable(width, 250px);
         }
         &-dots-grid-vertical-purple {
           opacity: 0.5;
           z-index: 1;
           bottom: -28%;
           right: -26%;
-          width: $img-dots-grid-vertical-purple-w;
-          @include tighter-than-wide-desktop {
-            width: $img-dots-grid-vertical-purple-w * 0.8;
-          }
-          @include tighter-than-desktop {
-            width: $img-dots-grid-vertical-purple-w * 0.6;
-          }
+          @include scalable(width, 250px);
         }
       }
       &-button {
@@ -400,7 +332,7 @@ export default {
         max-width: 600px;
       }
       @include mobile {
-        margin-top: 45px;
+        margin-top: 90px;
         letter-spacing: -3px;
       }
     }

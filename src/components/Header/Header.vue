@@ -40,6 +40,7 @@
             unelevated
             no-caps
             flat
+            :color="headerState === 'purple' && !isTabletOrTighter ? 'secondary' : undefined"
           >
             {{ nav.text }}
           </q-btn>
@@ -48,6 +49,7 @@
           <q-btn
             flat
             no-caps
+            :color="headerState === 'purple' && !isTabletOrTighter ? 'secondary' : undefined"
           >
             Log in
           </q-btn>
@@ -60,6 +62,7 @@
           <q-btn
             flat
             icon="search"
+            :color="headerState === 'purple' && !isTabletOrTighter ? 'secondary' : undefined"
           />
         </div>
       </div>

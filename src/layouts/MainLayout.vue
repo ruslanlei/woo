@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-layout">
     <Header />
     <slot />
     <Footer />
@@ -18,5 +18,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>
