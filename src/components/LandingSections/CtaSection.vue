@@ -30,24 +30,40 @@ export default {
 <style lang="scss">
   .cta-section {
     background: $color-purple-medium;
-    height: 261px;
     @include content-centred;
-    @include tighter-than-wide-desktop {
-      height: 180px;
+    @include scalable(height, 261px);
+    @include tablet-or-tighter {
+      padding: 24px;
+      height: auto;
+    }
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-end;
     }
     &__text {
       max-width: 855px;
-      @include text-lg;
       color: $color-white;
+      @include text-lg;
+      @include tighter-than-desktop {
+        max-width: 68%;
+      }
+      @include tablet-or-tighter {
+        max-width: 48%;
+      }
+      @include mobile {
+        max-width: 100%;
+        text-align: right;
+      }
       &-bold {
         font-weight: bold;
       }
     }
     &__button {
       margin-left: 67px;
-      border-width: 2px;
-      border-style: solid;
-      border-radius: 62px;
+      @include mobile {
+        margin-left: 0;
+        margin-top: 20px;
+      }
     }
   }
 </style>

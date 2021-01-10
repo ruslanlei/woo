@@ -139,7 +139,7 @@ $xxl: 1920;
   }
 }
 
-@mixin max-scalable($prop, $val) {
+  @mixin max-scalable($prop, $val) {
   #{$prop}: $val;
   @include tighter-than-wide-desktop {
     #{$prop}: $val * 0.8;

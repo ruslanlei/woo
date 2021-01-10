@@ -9,11 +9,14 @@
         alt="Logo"
       >
       <q-btn
+        v-if="isTabletOrTighter"
         class="header__menu-button"
         icon="menu"
         unelevated
         fab-mini
+        flat
         @click="switchMobileMenu"
+        :color="headerState === 'purple' ? 'secondary' : undefined"
       />
       <div
         class="header__content"
@@ -37,7 +40,6 @@
             unelevated
             no-caps
             flat
-            :color="buttonsState"
           >
             {{ nav.text }}
           </q-btn>
@@ -45,7 +47,6 @@
         <div class="header__options">
           <q-btn
             flat
-            :color="buttonsState"
             no-caps
           >
             Log in
@@ -58,7 +59,6 @@
           </q-btn>
           <q-btn
             flat
-            :color="buttonsState"
             icon="search"
           />
         </div>
@@ -113,15 +113,8 @@ export default {
     ...mapGetters({
       pageYOffset: 'getPageYOffset',
       activeSection: 'getActiveSection',
+      isTabletOrTighter: 'layout/isTabletOrTighter',
     }),
-    buttonsState() {
-      switch (this.headerState) {
-        case 'purple':
-          return 'secondary';
-        default:
-          return 'accent';
-      }
-    },
     headerState() {
       const section = this.activeSection;
       const offset = this.pageYOffset;
@@ -174,9 +167,6 @@ export default {
     }
     &__menu-button {
       position: relative;
-      @include wider-than-tablet {
-        display: none !important;
-      }
       &-back {
         position: absolute;
         top: 10px;

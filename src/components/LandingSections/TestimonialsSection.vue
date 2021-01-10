@@ -85,6 +85,9 @@ export default {
       rgba(236, 240, 253, 0) 100%
     );
     @include scalable(height, 1300px);
+    @include mobile {
+      height: auto;
+    }
     &__container {
       position: relative;
       height: 100%;

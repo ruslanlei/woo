@@ -18,6 +18,7 @@ export default {
   methods: {
     ...mapActions({
       receivePageYOffset: 'receivePageYOffset',
+      handleBreakpoint: 'layout/HANDLE_LAYOUT_BREAKPOINT',
     }),
   },
   computed: {
@@ -29,6 +30,9 @@ export default {
     window.addEventListener('scroll', () => {
       this.receivePageYOffset(window.pageYOffset);
     });
+    window.addEventListener('resize', this.handleBreakpoint);
+    window.addEventListener('orientationchange', this.handleBreakpoint);
+    this.handleBreakpoint();
   },
 };
 </script>

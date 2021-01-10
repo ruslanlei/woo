@@ -31,7 +31,7 @@
       <div class="additional-features-section__card-container">
         <template v-for="(feature, index) in features">
           <transition
-            :key="index"
+            :key="feature.name"
             name="additional-cards"
             v-on="{
               ...(index === 1 ? { enter } : {})
@@ -50,8 +50,8 @@
               :type="!(index % 2) ? 'additional' : 'additional-reverse'"
             >
               <img
-                v-for="(image, index) in feature.images"
-                :key="index"
+                v-for="image in feature.images"
+                :key="image.name"
                 :src="require(
                 // eslint-disable-next-line max-len
                   `@/assets/img/sections/additional-features/features/${feature.name}/${image.filename}`

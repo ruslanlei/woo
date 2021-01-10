@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Dev from '@/views/Dev.vue';
 import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
@@ -13,14 +12,6 @@ const routes = [
     component: Home,
     meta: {
       layout: 'mainLayout',
-    },
-  },
-  {
-    path: '/dev',
-    name: 'Dev',
-    component: Dev,
-    meta: {
-      layout: 'DefaultLayout',
     },
   },
 ];

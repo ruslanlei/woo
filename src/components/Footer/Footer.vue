@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="footer__top-section">
       <Container size="md" class="footer__top-section-container">
-        <div class="footer__image-animator-wrapper">
+        <div v-if="!isTabletOrTighter" class="footer__image-animator-wrapper">
           <ImageAnimator
             class="footer__image-animator"
             :initialize="initializeAnimation"
@@ -44,16 +44,22 @@
           <img class="footer__logo" :src="require('@/assets/img/footer/logo.svg')" alt="logo">
         </div>
         <div class="footer__divider" />
-        <div class="footer__row footer__row-bottom">
-          <div
+        <component
+          :is="isTabletOrTighter ? 'q-list' : 'div'"
+          dark
+          class="footer__row footer__row-bottom"
+        >
+          <component
+            :is="isTabletOrTighter ? 'q-expansion-item' : 'div'"
             class="footer__column"
             v-for="(column, index) in Object.keys(columns)"
             :key="index"
+            :label="column.replaceAll('_', ' ').toUpperCase()"
           >
-            <div class="footer__column-heading">
+            <div v-if="!isTabletOrTighter" class="footer__column-heading">
               {{ column.replaceAll('_', ' ').toUpperCase() }}
             </div>
-            <div>
+            <div class="footer__column-list">
               <div
                 class="footer__column-link"
                 v-for="(link, index) in columns[column]"
@@ -70,8 +76,8 @@
                 </q-btn>
               </div>
             </div>
-          </div>
-        </div>
+          </component>
+        </component>
       </Container>
     </div>
     <div class="footer__bottom-section">
@@ -114,11 +120,15 @@
             >
           </q-btn>
         </div>
-        <div class="footer__bottom-section-column">
+        <div class="footer__bottom-section-column footer__bottom-section-copyright">
           COPYRIGHT WOOCOMMERCE 2020 - TERMS & CONDITIONS  PRIVACY POLICY
         </div>
         <div class="footer__bottom-section-column">
-          <img :src="require('@/assets/img/footer/automattic.png')" alt="automattic">
+          <img
+            class="footer__bottom-section-automattic"
+            :src="require('@/assets/img/footer/automattic.png')"
+            alt="automattic"
+          >
         </div>
       </Container>
     </div>
@@ -128,6 +138,7 @@
 <script>
 import SectionMixin from '@/mixins/SectionMixin';
 import ImageAnimator from '@/components/ImageAnimator/ImageAnimator.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Footer',
@@ -185,6 +196,11 @@ export default {
       ],
     },
   }),
+  computed: {
+    ...mapGetters({
+      isTabletOrTighter: 'layout/isTabletOrTighter',
+    }),
+  },
 };
 </script>
 
@@ -198,6 +214,9 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        @include tablet-or-tighter {
+          padding: 0;
+        }
       }
     }
     &__image-animator {
@@ -215,9 +234,16 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      @include tablet-or-tighter {
+        flex-wrap: wrap;
+      }
     }
     &__feature {
       @include content-centred;
+      @include tablet-or-tighter {
+        margin-top: 15px;
+        margin-right: 20px;
+      }
       &-text {
         margin-left: 15px;
         @include text-md;
@@ -245,6 +271,9 @@ export default {
         align-items: center;
         padding: 51px 0 56px 0;
         max-width: 1227px;
+        @include tighter-than-desktop {
+          padding: 37px;
+        }
       }
       &-bottom {
         height: 55%;
@@ -254,13 +283,22 @@ export default {
         align-items: flex-start;
         padding: 70px;
         max-width: 1106px;
+        @include tablet-or-tighter {
+          display: block;
+          padding: 0;
+        }
       }
     }
     &__column {
       &-heading {
-        @include text-xs;
+        font-size: $font-size-xs;
         color: $color-white;
         font-weight: bold;
+      }
+      &-list {
+        @include tablet-or-tighter {
+          padding: 10px 30px;
+        }
       }
       &-link {
         @include text-xxs;
@@ -268,6 +306,9 @@ export default {
         margin-top: 8px;
         &:first-child {
           margin-top: 16px;
+          @include tablet-or-tighter {
+            margin-top: 0;
+          }
         }
       }
     }
@@ -280,10 +321,18 @@ export default {
       background: $color-white;
       height: 68px;
       @include content-centred;
+      @include tablet-or-tighter {
+        height: 230px;
+        padding: 30px 0;
+      }
       &-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        @include tablet-or-tighter {
+          flex-direction: column;
+          height: 100%;
+        }
       }
       &-column {
         flex-grow: 1;
@@ -300,6 +349,15 @@ export default {
           margin-left: 0;
         }
         margin-left: 54px;
+      }
+      &-copyright {
+        @include text-sm;
+        @include tablet-or-tighter {
+          text-align: center;
+        }
+      }
+      &-automattic {
+        width: 183px;
       }
     }
   }

@@ -1,12 +1,14 @@
 <template>
   <div class="people-section">
     <Container class="people-section__container">
-      <div class="people-section__heading">
-        Supported by real people
-      </div>
-      <div class="people-section__text">
-        Our team of Happiness Engineers works remotely
-        from 58 countries providing customer support across multiple time zones.
+      <div class="people-section__content">
+        <div class="people-section__heading">
+          Supported by real people
+        </div>
+        <div class="people-section__text">
+          Our team of Happiness Engineers works remotely
+          from 58 countries providing customer support across multiple time zones.
+        </div>
       </div>
       <ImageAnimator
         class="people-section__image-animator"
@@ -72,10 +74,22 @@ export default {
       overflow-y: hidden;
       @include content-centred;
       flex-direction: column;
+      @include mobile {
+        padding: 0;
+      }
+    }
+    &__content {
+      @include content-centred;
+      flex-direction: column;
+      position: relative;
+      z-index: 2;
     }
     &__heading {
       @include heading-dark;
       margin-top: 33px;
+      @include mobile {
+        max-width: 85%;
+      }
     }
     &__text {
       @include text-sm;
@@ -84,6 +98,10 @@ export default {
       text-align: center;
       color: $color-grey-2;
       line-height: 25px;
+      @include mobile {
+        max-width: 85%;
+        text-align: left;
+      }
     }
     &__image-animator {
       position: absolute;
@@ -96,22 +114,27 @@ export default {
         &-circle-xl {
           left: 2%;
           top: 14%;
+          @include scalable(width, 61px);
         }
         &-circle-md {
           right: 12%;
           top: 12%;
+          @include scalable(width, 43px);
         }
         &-circle-sm {
           left: 8%;
           bottom: 22%;
+          @include scalable(width, 34px);
         }
         &-dots-grid-green {
           left: 0;
           bottom: -15%;
+          @include scalable(width, 162px);
         }
         &-dots-grid-red {
           right: 5%;
           bottom: -20%;
+          @include scalable(width, 213px);
         }
       }
     }
@@ -120,11 +143,15 @@ export default {
       z-index: 2;
       overflow: hidden;
       width: 1438px;
-      min-width: 1438px;
-      height: 292px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
+      @include tighter-than-desktop {
+        width: 100%;
+      }
+    }
+    &__people-image {
+      width: 100%;
     }
   }
 </style>
