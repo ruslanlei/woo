@@ -125,43 +125,43 @@ export default {
         position: absolute;
         opacity: 0;
         &-employe-1 {
-          @include scalable(top, 20%);
-          @include scalable(left, 18%);
+          top: 20%;
+          left: 18%;
           @include scalable(width, 136px);
         }
         &-employe-2 {
-          @include scalable(top, 16%);
-          @include scalable(right, 20%);
+          top: 16%;
+          right: 20%;
           @include scalable(width, 94px);
         }
         &-employe-3 {
-          @include scalable(top, 36%);
-          @include scalable(right, 8%);
+          top: 36%;
+          right: 8%;
           @include scalable(width, 154px);
         }
         &-employe-4 {
-          @include scalable(bottom, 26%);
-          @include scalable(right, 16%);
+          bottom: 26%;
+          right: 16%;
           @include scalable(width, 89px);
         }
         &-employe-5 {
-          @include scalable(bottom, 30%);
-          @include scalable(left, 12%);
+          bottom: 30%;
+          left: 12%;
           @include scalable(width, 105px);
         }
         &-employe-6 {
-          @include scalable(top, 38%);
-          @include scalable(left, 6%);
+          top: 38%;
+          left: 6%;
           @include scalable(width, 93px);
         }
         &-dots-grid-red {
-          @include scalable(top, 34%);
-          @include scalable(right, 22%);
+          top: 34%;
+          right: 22%;
           @include scalable(width, 472px);
         }
         &-dots-grid-green {
-          @include scalable(bottom, 28%);
-          @include scalable(left, 22%);
+          bottom: 28%;
+          left: 22%;
           @include scalable(width, 472px);
         }
       }

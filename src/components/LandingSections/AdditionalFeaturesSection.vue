@@ -197,10 +197,10 @@ export default {
         &-image-bg {
           position: absolute;
           z-index: 1;
-          bottom: -40px;
           filter: blur(20px) drop-shadow(-25px 20px 44px rgba(84, 48, 209, 0.4));
           transform: scale(0.9);
           @include scalable(width, $image-w);
+          @include scalable(bottom, -40px);
         }
       }
     }

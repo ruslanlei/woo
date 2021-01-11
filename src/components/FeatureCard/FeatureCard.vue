@@ -78,7 +78,7 @@ export default {
 <style lang="scss">
   .feature-card {
     $container-width: 430px;
-    @include scalable(max-width, $container-width);
+    @include scalable(max-width, 430px);
     &--primary {
       .feature-card__img-container {
         @include scalable(height, 293px);
@@ -94,7 +94,6 @@ export default {
       @include tablet-or-tighter {
         flex-direction: column;
         align-items: flex-start;
-        max-width: $container-width * 0.6;
       }
       .feature-card__img-container {
         @include scalable(max-width, $container-width);
@@ -125,7 +124,6 @@ export default {
       @include scalable(max-width, 980px);
       @include tablet-or-tighter {
         flex-direction: column;
-        max-width: $container-width * 0.6;
       }
       .feature-card__img-container {
         @include scalable(max-width, $container-width);

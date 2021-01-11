@@ -213,54 +213,21 @@ export default {
         }
         &-image {
           &-payment {
-            $payment-w: 430px;
-
             border-radius: 17px;
-            width: $payment-w;
-            @include tighter-than-wide-desktop {
-              width: $payment-w * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $payment-w * 0.6;
-            }
+            @include scalable(width, 430px);
           }
           &-apple-pay {
-            $apple-pay-width: 55px;
-            $apple-pay-left: -70px;
-
             z-index: 3;
-            left: -70px;
-            top: -10px;
-            width: $apple-pay-width;
-            @include tighter-than-wide-desktop {
-              width: $apple-pay-width * 0.8;
-              left: $apple-pay-left * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $apple-pay-width * 0.6;
-              left: $apple-pay-left * 0.6;
-            }
+            @include scalable(width, 55px);
+            @include scalable(left, -70px);
+            @include scalable(top, -10px);
           }
           &-payment-settings {
-            $payment-settings-w: 220px;
-            $payment-settings-top: 40px;
-            $payment-settings-left: -110px;
-
             z-index: 2;
-            left: $payment-settings-left;
-            top: $payment-settings-top;
-            width: $payment-settings-w;
             border-radius: 10px;
-            @include tighter-than-wide-desktop {
-              width: $payment-settings-w * 0.8;
-              left: $payment-settings-left * 0.8;
-              top: $payment-settings-top * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $payment-settings-w * 0.6;
-              left: $payment-settings-left * 0.6;
-              top: $payment-settings-top * 0.6;
-            }
+            @include scalable(width, 220px);
+            @include scalable(left, -110px);
+            @include scalable(top, 40px);
           }
         }
       }
@@ -278,109 +245,43 @@ export default {
           margin-top: 100px;
         }
         &-image {
-          $phone-w: 430px;
           $cards-w: 105px;
           &-phone {
+            @include scalable(width, 430px);
             border-radius: 17px;
-            width: $phone-w;
-            @include tighter-than-wide-desktop {
-              width: $phone-w * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $phone-w * 0.6;
-            }
           }
           &-facebook {
-            $fb-left: 40px;
-
+            @include scalable(width, $cards-w);
+            @include scalable(border-radius, 10px);
+            @include scalable(left, 40px);
             z-index: 2;
-            border-radius: 10px;
-            width: $cards-w;
-            left: $fb-left;
-            @include tighter-than-wide-desktop {
-              width: $cards-w * 0.8;
-              border-radius: 5px;
-              left: $fb-left * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $cards-w * 0.6;
-              left: $fb-left * 0.6;
-            }
           }
           &-google {
-            $g-bottom: -30px;
-
-            bottom: $g-bottom;
+            @include scalable(width, $cards-w);
+            @include scalable(border-radius, 10px);
+            @include scalable(bottom, -30px);
             z-index: 2;
-            width: $cards-w;
-            border-radius: 10px;
-            @include tighter-than-wide-desktop {
-              width: $cards-w * 0.8;
-              border-radius: 5px;
-              bottom: $g-bottom * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $cards-w * 0.6;
-              bottom: $g-bottom * 0.6;
-            }
           }
           &-jetpack {
-            $jetpack-right: 100px;
-            $jetpack-top: 140px;
-
+            @include scalable(width, $cards-w);
+            @include scalable(border-radius, 10px);
+            @include scalable(right, 100px);
+            @include scalable(top, 140px);
             z-index: 2;
-            right: $jetpack-right;
-            top: $jetpack-top;
-            width: $cards-w;
-            border-radius: 10px;
-            @include tighter-than-wide-desktop {
-              width: $cards-w * 0.8;
-              border-radius: 5px;
-              right: $jetpack-right * 0.8;
-              top: $jetpack-top * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $cards-w * 0.6;
-              right: $jetpack-right * 0.6;
-              top: $jetpack-top * 0.6;
-            }
           }
           &-mail-chimp {
-            $mail-chimp-right: 35px;
-            $mail-chimp-top: 22px;
-
+            @include scalable(width, $cards-w);
+            @include scalable(border-radius, 10px);
+            @include scalable(right, 35px);
+            @include scalable(top, 22px);
             z-index: 2;
-            right: 35px;
-            top: 22px;
-            width: $cards-w;
-            border-radius: 10px;
-            @include tighter-than-wide-desktop {
-              width: $cards-w * 0.8;
-              border-radius: 5px;
-              right: $mail-chimp-right * 0.8;
-              top: $mail-chimp-top * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $cards-w * 0.6;
-              right: $mail-chimp-right * 0.6;
-              top: $mail-chimp-top * 0.6;
-            }
           }
           &-square {
-            top: -50px;
-            left: 40px;
+            @include scalable(width, $cards-w);
+            @include scalable(border-radius, 10px);
+            @include scalable(left, 40px);
+            @include scalable(top, -50px);
             z-index: 2;
-            width: $cards-w;
-            border-radius: 10px;
-            @include tighter-than-wide-desktop {
-              width: $cards-w * 0.8;
-              border-radius: 5px;
-              left: 30px;
-              top: -15px;
-            }
-            @include tighter-than-desktop {
-              width: $cards-w * 0.6;
-            }
           }
         }
       }
@@ -392,81 +293,28 @@ export default {
         @include tighter-than-tablet {
           margin-top: 100px;
         }
-        @include tighter(700) {
-          margin-top: 100px;
-        }
         &-image {
           &-employe {
-            $employe-w: 430px;
-
-            border-radius: 17px;
-            width: $employe-w;
-            @include tighter-than-wide-desktop {
-              width: $employe-w * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $employe-w * 0.6;
-            }
+            @include scalable(width, 430px);
+            @include scalable(border-radius, 17px);
           }
           &-people {
-            $people-w: 114px;
-            $people-top: -130px;
-            $people-right: 50px;
-
-            top: $people-top;
-            right: $people-right;
+            @include scalable(width, 114px);
+            @include scalable(top, -130px);
+            @include scalable(right, 50px);
             z-index: 2;
-            width: $people-w;
-            @include tighter-than-wide-desktop {
-              width: $people-w * 0.8;
-              top: $people-top * 0.8;
-              right: $people-right * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $people-w * 0.6;
-              top: $people-top * 0.6;
-              right: $people-right * 0.6;
-            }
           }
           &-laptop {
-            $laptop-w: 140px;
-            $laptop-top: -50px;
-            $laptop-left: 40px;
-
-            top: $laptop-top;
-            left: $laptop-left;
+            @include scalable(width, 140px);
+            @include scalable(top, -50px);
+            @include scalable(left, 40px);
             z-index: 2;
-            width: $laptop-w;
-            @include tighter-than-wide-desktop {
-              width: $laptop-w * 0.8;
-              top: $laptop-top * 0.8;
-              left: $laptop-left * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $laptop-w * 0.6;
-              top: $laptop-top * 0.6;
-              left: $laptop-left * 0.6;
-            }
           }
           &-girls {
-            $girls-w: 170px;
-            $girls-right: -60px;
-            $girls-bottom: 50px;
-
-            right: $girls-right;
-            bottom: $girls-bottom;
+            @include scalable(width, 170px);
+            @include scalable(bottom, 50px);
+            @include scalable(right, -60px);
             z-index: 2;
-            width: $girls-w;
-            @include tighter-than-wide-desktop {
-              width: $girls-w * 0.8;
-              right: $girls-right * 0.8;
-              bottom: $girls-bottom * 0.8;
-            }
-            @include tighter-than-desktop {
-              width: $girls-w * 0.6;
-              right: $girls-right * 0.6;
-              bottom: $girls-bottom * 0.6;
-            }
           }
         }
       }

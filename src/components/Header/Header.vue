@@ -20,12 +20,11 @@
       />
       <div
         class="header__content"
-        :class="{
-          'header__content--visible': isMenuOpen
-        }"
+        :class="{ 'header__content--visible': isMenuOpen }"
       >
         <div class="header__menu-button-back">
           <q-btn
+            v-if="isTabletOrTighter"
             class="header__menu-button"
             icon="arrow_forward"
             unelevated
@@ -40,30 +39,15 @@
             unelevated
             no-caps
             flat
-            :color="headerState === 'purple' && !isTabletOrTighter ? 'secondary' : undefined"
+            :color="buttonsState"
           >
             {{ nav.text }}
           </q-btn>
         </div>
         <div class="header__options">
-          <q-btn
-            flat
-            no-caps
-            :color="headerState === 'purple' && !isTabletOrTighter ? 'secondary' : undefined"
-          >
-            Log in
-          </q-btn>
-          <q-btn
-            color="primary"
-            no-caps
-          >
-            Get started
-          </q-btn>
-          <q-btn
-            flat
-            icon="search"
-            :color="headerState === 'purple' && !isTabletOrTighter ? 'secondary' : undefined"
-          />
+          <q-btn flat no-caps :color="buttonsState">Log in</q-btn>
+          <q-btn color="primary" no-caps>Get started</q-btn>
+          <q-btn flat icon="search" :color="buttonsState" />
         </div>
       </div>
     </Container>
@@ -140,6 +124,11 @@ export default {
       }
       return null;
     },
+    buttonsState() {
+      return this.headerState === 'purple' && !this.isTabletOrTighter
+        ? 'secondary'
+        : undefined;
+    },
   },
   watch: {
     pageYOffset(newVal, oldVal) {
@@ -175,9 +164,6 @@ export default {
         top: 10px;
         left: 10px;
         z-index: 2;
-        @include wider-than-tablet {
-          display: none !important;
-        }
       }
     }
     &__content {
@@ -228,23 +214,18 @@ export default {
         flex-direction: column;
       }
     }
-    &--white-transparent {
+    &--white-transparent, &--white, &--purple {
       backdrop-filter: blur(20px);
-      background: rgba($color-blue-light, 0.9);
       box-shadow: 0 1px 2px rgba(black, 0.1);
+    }
+    &--white-transparent {
+      background: rgba($color-blue-light, 0.9);
     }
     &--white {
-      backdrop-filter: blur(20px);
       background: rgba($color-white, 0.9);
-      box-shadow: 0 1px 2px rgba(black, 0.1);
     }
     &--purple {
-      backdrop-filter: blur(20px);
       background: rgba($color-purple, 0.9);
-      box-shadow: 0 1px 2px rgba(black, 0.1);
-    }
-    &-filled {
-      background: $color-white;
     }
     &__logo {
       margin-right: 144px;
