@@ -101,7 +101,6 @@ export default {
     this.genId();
     this.adjournAnimationPlay = debounce(this.playAnimation, 150);
     window.addEventListener('scroll', this.pauseAnimationOnScroll);
-    window.addEventListener('scroll', this.receiveVisibility);
   },
   mounted() {
     this.receiveVisibility();

@@ -20,9 +20,6 @@ export default {
   .container {
     width: 100%;
     margin: 0 auto;
-    @include tighter(1810) {
-      padding: 0 37px;
-    }
     &__xl {
       max-width: 1810px;
     }
